@@ -564,6 +564,65 @@ img{display:block}
 .per-p{font-size:13px;color:var(--muted);text-align:right}
 .per-p b{font-family:var(--f-num);font-size:17px;color:var(--ink)}
 
+/* ---------- compact layout ---------- */
+.sec-c{padding-top:26px}
+.sec-c .sec-h{margin-bottom:10px;align-items:center}
+.sec-c .sec-h h2{font-size:19px}
+.btn.sm{padding:7px 14px;font-size:13.5px}
+.acc{padding:0;overflow:hidden}
+.acc details+details{border-top:1px solid var(--line)}
+.acc summary{list-style:none;display:grid;grid-template-columns:32px 1fr auto 18px;gap:10px;align-items:center;padding:10px 12px 10px 12px;cursor:pointer;min-height:54px}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary:hover{background:var(--surface-2)}
+.ai2{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 15%,transparent);color:var(--c)}
+.ai2 svg{width:18px;height:18px}
+.acc .st{min-width:0}
+.acc .st b{display:block;font-size:14.5px;font-weight:600;line-height:1.3}
+.acc .st small{display:block;font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.acc summary .ring{font-size:15px}
+.acc summary .ring svg{width:28px;height:28px}
+.chev{width:18px;height:18px;color:var(--muted);transition:transform .25s}
+.acc details[open] .chev{transform:rotate(180deg)}
+.acc details[open] summary{background:var(--surface-2)}
+.acc-b{padding:12px;animation:fade .25s}
+.acc .check{padding:0;border:1px solid var(--line);border-radius:14px}
+.acc .conv{padding:0}
+.acc .ticket::before,.acc .ticket::after{background:var(--surface)}
+.ctop{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:10px 12px}
+.ctop .dotc{width:10px;height:10px;border-radius:50%;background:var(--muted)}
+.ctop .dotc.good{background:var(--bamboo)}.ctop .dotc.warn{background:var(--gold)}
+.ctop .t{min-width:0}
+.ctop .t b{display:block;font-size:13.5px;line-height:1.35}
+.ctop .t small{display:block;font-size:11.5px;color:var(--muted);line-height:1.35}
+.ctop .t small.err-t{color:var(--chili)}
+.mapbox.sm{height:210px}
+.mems2{display:flex;gap:6px;overflow-x:auto;margin-inline:-16px;padding:0 16px 2px;scrollbar-width:none}
+.mems2::-webkit-scrollbar{display:none}
+.mc{flex-shrink:0;display:flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 10px 4px 4px;cursor:pointer;text-align:left}
+.mc b{display:block;font-size:12.5px;line-height:1.2}
+.mc small{display:block;font-size:10.5px;color:var(--muted);line-height:1.2;white-space:nowrap}
+.mc.me{border-color:color-mix(in srgb,var(--c) 55%,var(--line))}
+.ctools{display:flex;gap:4px 12px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--muted)}
+.ctools button,.ctools a{border:0;background:none;padding:2px 0;color:var(--river);font-weight:600;font-size:12.5px;cursor:pointer;text-decoration:none;font-family:inherit}
+.mtop{padding:12px 14px;display:grid;gap:8px}
+.mtop .tot{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.mtop .tot b{font-family:var(--f-num);font-size:28px;line-height:1}
+.mtop .tot span{font-size:12.5px;color:var(--muted)}
+.st2{display:grid;grid-template-columns:auto auto auto 1fr auto;gap:6px;align-items:center;padding:6px 0;border-top:1px dashed var(--line);font-size:12.5px}
+.st2 svg{width:14px;height:14px;color:var(--muted)}
+.st2 .nm{color:var(--muted);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.st2 .amt{font-family:var(--f-num);font-size:17px;font-weight:700;text-align:right;line-height:1.1}
+.st2 .amt small{display:inline;margin-left:5px;font-family:var(--f-body);font-size:11px;font-weight:500;color:var(--muted)}
+.st2{padding:4px 0}
+.st-none{font-size:12.5px;color:var(--bamboo);font-weight:600;border-top:1px dashed var(--line);padding-top:8px}
+.macc{padding:0;overflow:hidden}
+.macc summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:11px 14px;cursor:pointer;font-weight:600;font-size:13.5px}
+.macc summary::-webkit-details-marker{display:none}
+.macc summary small{font-weight:500;color:var(--muted);font-size:12px}
+.macc[open] .chev{transform:rotate(180deg)}
+.macc .mb{padding:0 12px 12px}
+.macc .bal{padding:0;border:0;box-shadow:none}
+
 .inst{margin-top:12px;padding:14px;display:grid;grid-template-columns:48px 1fr;gap:4px 12px;align-items:center;position:relative}
 .inst img{width:48px;height:48px;border-radius:12px;grid-row:span 2}
 .inst b{font-family:var(--f-display);font-size:15px}
@@ -604,14 +663,14 @@ img{display:block}
   <nav class="dnav" aria-label="เลือกวัน"><div class="dnav-in" id="dnav"></div></nav>
   <section class="panel" id="panel" aria-live="polite"></section>
 
-  <section class="sec" id="crew">
-    <div class="sec-h"><div><span class="kicker">ทริปเมท</span><h2>เพื่อนร่วมทริป</h2><p>เจมส์ · ลิงค์ · พีช · นิว · จูน</p></div><button class="sync" id="syncPill" hidden></button></div>
-    <div id="crewBody" style="display:grid;gap:10px"></div>
+  <section class="sec sec-c" id="money">
+    <div class="sec-h"><h2>ใครจ่าย ใครโอน</h2><button class="btn red sm" id="addExp" hidden>+ เพิ่ม</button></div>
+    <div id="moneyBody" style="display:grid;gap:8px"></div>
   </section>
 
-  <section class="sec" id="money">
-    <div class="sec-h"><div><span class="kicker">หารค่าใช้จ่าย</span><h2>ใครจ่าย ใครต้องโอน</h2><p>บันทึกเป็นหยวนหรือบาท ระบบสรุปยอดให้</p></div><button class="btn red" id="addExp" hidden>+ เพิ่ม</button></div>
-    <div id="moneyBody" style="display:grid;gap:10px"></div>
+  <section class="sec sec-c" id="crew">
+    <div class="sec-h"><h2>เพื่อนร่วมทริป</h2><button class="sync" id="syncPill" hidden></button></div>
+    <div id="crewBody" style="display:grid;gap:8px"></div>
   </section>
 
   <section class="sec rv" id="route">
@@ -624,33 +683,24 @@ img{display:block}
     <div class="reel" id="reel"></div>
   </section>
 
-  <section class="sec" id="prep">
-    <div class="sec-h"><div><span class="kicker">ข้อมูลเดินทาง</span><h2>ตั๋วและการเดินทาง</h2><p>เวลาเครื่องบินเป็นเวลาท้องถิ่นของแต่ละสนามบิน</p></div></div>
-    <div class="tix" id="tix"></div>
-
-    <div class="sec-h" style="margin-top:28px"><div><h2>ของที่ต้องเตรียม</h2><p>ติ๊กแล้วระบบจำไว้ในเครื่องนี้</p></div><div class="ring" id="ring"></div></div>
-    <div class="card check" id="check"></div>
-
-    <div class="sec-h" style="margin-top:28px"><div><h2>ประโยคจีนใช้บ่อย</h2><p>แตะเพื่อขยายเต็มจอให้คนจีนอ่าน</p></div></div>
-    <div class="phr" id="phr"></div>
-
-    <div class="sec-h" style="margin-top:28px"><div><h2>แลกเงิน หยวน ↔ บาท</h2></div></div>
-    <div class="card conv">
+  <section class="sec sec-c" id="prep">
+    <div class="sec-h"><h2>ข้อมูลเดินทาง</h2></div>
+    <div class="card acc">
+      <details><summary><span class="ai2" style="--c:var(--river)" data-ic="ticket"></span><span class="st"><b>ตั๋วเครื่องบิน & รถไฟ</b><small>ไป 14 ต.ค. 01:10 · กลับ 19 ต.ค. 22:05</small></span><svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg></summary><div class="acc-b"><div class="tix" id="tix"></div><p class="note" style="margin-top:8px">เวลาเครื่องบินเป็นเวลาท้องถิ่นของแต่ละสนามบิน</p></div></details>
+      <details><summary><span class="ai2" style="--c:var(--bamboo)" data-ic="done"></span><span class="st"><b>ของที่ต้องเตรียม</b><small>ติ๊กแล้วจำไว้ในเครื่องนี้</small></span><span class="ring" id="ring"></span><svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg></summary><div class="acc-b"><div class="check" id="check"></div></div></details>
+      <details><summary><span class="ai2" style="--c:var(--chili)" data-ic="talk"></span><span class="st"><b>ประโยคจีนใช้บ่อย</b><small>แตะประโยคเพื่อขยายเต็มจอ</small></span><svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg></summary><div class="acc-b"><div class="phr" id="phr"></div></div></details>
+      <details><summary><span class="ai2" style="--c:var(--gold)" data-ic="wallet"></span><span class="st"><b>แลกเงิน หยวน ↔ บาท</b><small><span id="rateSub">1 หยวน ≈ 5.03 บาท</span></small></span><svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg></summary><div class="acc-b"><div class="conv">
       <div class="conv-r">
         <div class="fld"><label for="cny">หยวน (CNY)</label><input id="cny" inputmode="decimal" value="100"></div><span>⇄</span>
         <div class="fld"><label for="thb">บาท (THB)</label><input id="thb" inputmode="decimal"></div>
       </div>
       <div class="qk" id="qk"></div>
-      <div class="rate"><label for="rate">เรต 1 หยวน =</label><input id="rate" inputmode="decimal" value="5.03"><span>บาท</span></div><p style="margin:0;font-size:12px;color:var(--muted)">เรตกลางตลาด ณ 12 ต.ค. 2026 (Wise / Pluang) ร้านแลกเงินและธนาคารจะให้เรตต่างจากนี้เล็กน้อย แก้ตัวเลขให้ตรงเรตที่แลกจริงได้</p><div hidden></div>
+      <div class="rate"><label for="rate">เรต 1 หยวน =</label><input id="rate" inputmode="decimal" value="5.03"><span>บาท</span></div><p style="margin:0;font-size:12px;color:var(--muted)">เรตกลางตลาด ณ 12 ต.ค. 2026 (Wise / Pluang) ร้านแลกเงินและธนาคารจะให้เรตต่างจากนี้เล็กน้อย แก้ตัวเลขให้ตรงเรตที่แลกจริงได้</p>
+    </div></div></details>
+      <details><summary><span class="ai2" style="--c:var(--plum2)" data-ic="globe"></span><span class="st"><b>แอปที่ควรมี</b><small>Alipay · WeChat · DiDi · Amap · Trip.com</small></span><svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg></summary><div class="acc-b"><div class="apps" id="apps"></div></div></details>
+      <details><summary><span class="ai2" style="--c:var(--chili)" data-ic="warn"></span><span class="st"><b>ข้อมูลสำคัญ & เบอร์ฉุกเฉิน</b><small>ตำรวจ 110 · รถพยาบาล 120 · ดับเพลิง 119</small></span><svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg></summary><div class="acc-b"><div class="info" id="info"></div><div class="sos" style="margin-top:8px"><div class="card"><b>110</b><span>ตำรวจ</span></div><div class="card"><b>120</b><span>รถพยาบาล</span></div><div class="card"><b>119</b><span>ดับเพลิง</span></div></div></div></details>
     </div>
-
-    <div class="sec-h" style="margin-top:28px"><div><h2>แอปที่ควรมี</h2></div></div>
-    <div class="apps" id="apps"></div>
-
-    <div class="sec-h" style="margin-top:28px"><div><h2>ข้อมูลสำคัญ</h2></div></div>
-    <div class="info" id="info"></div>
-    <div class="sos" style="margin-top:10px"><div class="card"><b>110</b><span>ตำรวจ</span></div><div class="card"><b>120</b><span>รถพยาบาล</span></div><div class="card"><b>119</b><span>ดับเพลิง</span></div></div>
-    <p class="foot">เวอร์ชัน 13/10 23:52 · ใช้งานได้แม้ไม่มีอินเทอร์เน็ต (ยกเว้นลิงก์แผนที่) · รูปสถานที่ตัดจากโปสเตอร์แผนเที่ยวต้นฉบับ · เวลาในตารางเป็นเวลาจีน (เร็วกว่าไทย 1 ชม.)</p>
+    <p class="foot">เวอร์ชัน 14/10 00:09 · ใช้งานได้แม้ไม่มีอินเทอร์เน็ต (ยกเว้นลิงก์แผนที่) · รูปสถานที่ตัดจากโปสเตอร์แผนเที่ยวต้นฉบับ · เวลาในตารางเป็นเวลาจีน (เร็วกว่าไทย 1 ชม.)</p>
     <button class="resetbtn" id="resetTicks">ล้างเครื่องหมาย "ไปแล้ว" ที่ติ๊กเอง</button>
   </section>
 </main>
@@ -887,7 +937,7 @@ $('#simOff').onclick=()=>{st.sim=null;$('#simBox').hidden=true;$('#simTog').text
 function renderNav(){const ld=liveEv()?liveDay():0;
  $('#dnav').innerHTML=DAYS.map(d=>{const dn=d.ev.filter(isDone).length,all=d.ev.length,past=dn===all;
   return `<button class="pill ${past?'past':''}" data-d="${d.n}" aria-pressed="${st.day===d.n}" style="--cc:var(${d.cc})" aria-label="Day ${d.n} ${d.dow} ${+d.date.slice(8)} ตุลาคม ${past?'ไปครบแล้ว':dn+' จาก '+all+' รายการ'}">${past?`<span style="grid-row:span 2;color:var(--bamboo);width:26px;height:26px">${ic('done')}</span>`:ringSvg(dn/all,d.cc,26,3)}<b>D${d.n}</b><span>${+d.date.slice(8)} ต.ค.</span>${ld===d.n?'<i class="today" title="วันนี้"></i>':''}</button>`}).join('')+
-  `<button class="pill link" data-jump="route">${ic('globe')}<span>ภาพรวม</span></button><button class="pill link" data-jump="crew">${ic('people')}<span>เพื่อน</span></button><button class="pill link" data-jump="money">${ic('wallet')}<span>หารเงิน</span></button><button class="pill link" data-jump="prep">${ic('bag2')}<span>เตรียมตัว</span></button>`;
+  `<button class="pill link" data-jump="route">${ic('globe')}<span>ภาพรวม</span></button><button class="pill link" data-jump="money">${ic('wallet')}<span>หารเงิน</span></button><button class="pill link" data-jump="crew">${ic('people')}<span>เพื่อน</span></button><button class="pill link" data-jump="prep">${ic('bag2')}<span>เตรียมตัว</span></button>`;
  $('#dnav').querySelectorAll('button.pill[data-d]').forEach(b=>b.onclick=()=>selectDay(+b.dataset.d,true));
  $('#dnav').querySelectorAll('[data-jump]').forEach(b=>b.onclick=()=>{H.push({v:'jump',day:st.day});document.getElementById(b.dataset.jump).scrollIntoView({behavior:reduce?'auto':'smooth'})});
  const on=$('#dnav').querySelector('[aria-pressed="true"]');const nav=$('#dnav');if(on)nav.scrollTo({left:on.offsetLeft-nav.clientWidth/2+on.offsetWidth/2,behavior:reduce?'auto':'smooth'});
@@ -1140,6 +1190,10 @@ $('#phr').querySelectorAll('.ph-c').forEach(b=>b.onclick=()=>{lastFocus=b;const 
  $('#qk').innerHTML=[10,30,50,100,200,500].map(v=>`<button class="mini" data-v="${v}">¥${v}</button>`).join('');
  $('#qk').querySelectorAll('button').forEach(b=>b.onclick=()=>{c.value=b.dataset.v;c.oninput()});})();
 
+/* ---------- prep accordion ---------- */
+document.querySelectorAll('.ai2[data-ic]').forEach(x=>x.innerHTML=ic(x.dataset.ic));
+function rateSub(){const e=$('#rateSub');if(e)e.textContent='1 หยวน ≈ '+(parseFloat(store.get('rate2','5.03'))||5.03)+' บาท · แปลงเงินได้ทันที'}
+rateSub();$('#rate').addEventListener('input',rateSub);
 /* ---------- apps & info ---------- */
 $('#apps').innerHTML=[['Alipay','จ่ายเงิน','#1677FF','支'],['WeChat','แชต/จ่ายเงิน','#07C160','微'],['DiDi','เรียกรถ','#FF7A1A','滴'],['Amap','แผนที่จีน','#2D7BF4','高'],['Trip.com','ตั๋ว/ที่พัก','#287DFA','携'],['แปลภาษา','เมนู/ป้าย','#6B5BD2','译']].map(([n,s,c,g])=>`<div class="card app"><i style="background:${c}">${g}</i><b>${n}</b><span>${s}</span></div>`).join('');
 $('#info').innerHTML=[['สกุลเงิน','หยวน (CNY)'],['เวลา','เร็วกว่าไทย 1 ชม.'],['ปลั๊กไฟ','2 ขา (Type A/I)'],['อินเทอร์เน็ต','eSIM / โรมมิ่ง'],['ภาษา','จีน (ใช้แอปแปล)'],['สนามบิน','Tianfu (TFU) T1']].map(([a,b])=>`<div class="card inf"><span>${a}</span><b>${b}</b></div>`).join('');
@@ -1252,28 +1306,27 @@ function renderCrew(){const el=$('#crewBody');if(!el)return;renderSyncPill();
  if(!ME){el.innerHTML=`<div class="card crew-card"><h3>คุณคือใคร?</h3><p>เลือกชื่อของคุณ เพื่อให้เพื่อนเห็นตำแหน่งและรายการที่คุณบันทึก</p><div class="who">${MEM.map(m=>`<button data-me="${m.id}" style="--c:${m.c}">${av(m.id)}${m.th}</button>`).join('')}</div></div>`;
   el.querySelectorAll('[data-me]').forEach(b=>b.onclick=()=>{ME=b.dataset.me;store.set('me',ME);renderCrew();renderMoney();toast('สวัสดี '+MM[ME].th)});return}
  // build stable skeleton once
- if(!$('#crewMap')){el.innerHTML=`<div id="crewSum"></div><div class="card share-row" id="shareRow"></div><div class="mapbox"><div id="crewMap" style="width:100%;height:100%"><div class="map-msg">กำลังโหลดแผนที่…</div></div><button class="map-fit" id="mapFit">ดูทุกคน</button></div><div class="mems" id="mems"></div><div class="crew-tools" id="crewTools"></div><p class="note">ตำแหน่งอัปเดตเฉพาะตอนเปิดแอปค้างไว้ (มือถือไม่อนุญาตให้เว็บแอปส่งตำแหน่งตอนปิดหน้าจอ) แผนที่ใช้ OpenStreetMap</p>`;
+ if(!$('#crewMap')){el.innerHTML=`<div class="card ctop" id="crewTop"></div><div class="mapbox sm"><div id="crewMap" style="width:100%;height:100%"><div class="map-msg">กำลังโหลดแผนที่…</div></div><button class="map-fit" id="mapFit">ดูทุกคน</button></div><div class="mems2" id="mems"></div><div class="ctools" id="crewTools"></div>`;
   $('#mapFit').onclick=()=>{userMoved=false;fitAll()};ensureMap()}
- // summary
- const fresh=CS.locations.filter(l=>ageMs(l.at)<STALE&&l.member!==ME);const me=myPos;let sum;
+ // summary + share toggle (one compact row)
+ const fresh=CS.locations.filter(l=>ageMs(l.at)<STALE&&l.member!==ME);const me=myPos;let tone='idle',line1;
  if(me&&fresh.length){const far=fresh.map(l=>({l,d:distM(me,l)})).filter(x=>x.d>300).sort((a,b)=>b.d-a.d);
-  const near=fresh.length-far.length,notSh=5-1-fresh.length;
-  sum=far.length?`<div class="crew-sum warn">${ic('warn')}<div>${far.map(x=>MM[x.l.member].th+' ห่าง '+fmtDist(x.d)).join(' · ')}<br><span>${near?`อีก ${near} คนอยู่ใกล้คุณ (ภายใน 300 ม.)`:''}${near&&notSh?' · ':''}${notSh?`${notSh} คนยังไม่ได้แชร์ตำแหน่ง`:''}</span></div></div>`:`<div class="crew-sum good">${ic('done')}<div>${fresh.length===4?'อยู่ใกล้กันครบทั้ง 5 คน':'ทุกคนที่แชร์ตำแหน่งอยู่ใกล้คุณ'}<br><span>${fresh.length+1} คน ภายใน 300 ม.${fresh.length<4?` · ${4-fresh.length} คนยังไม่ได้แชร์ตำแหน่ง`:''}</span></div></div>`}
- else sum=`<div class="crew-sum idle">${ic('people')}<div>แชร์ตำแหน่งอยู่ ${CS.locations.filter(l=>ageMs(l.at)<STALE).length} จาก 5 คน<br><span>${sharing?'รอสัญญาณ GPS…':'เปิดแชร์ตำแหน่งเพื่อดูระยะห่างจากเพื่อน'}</span></div></div>`;
- $('#crewSum').innerHTML=sum;
- // share toggle
- const gmsg=geoErr==='denied'?'ไม่ได้รับสิทธิ์ตำแหน่ง เปิดที่ การตั้งค่าเครื่อง → ความเป็นส่วนตัว → ตำแหน่ง':geoErr==='nofix'?'ยังจับสัญญาณ GPS ไม่ได้ ลองออกไปที่โล่ง':geoErr==='ไม่รองรับ'?'อุปกรณ์นี้ไม่รองรับการระบุตำแหน่ง':sharing?(myPos?`แชร์อยู่ · แม่นยำ ±${Math.round(myPos.acc)} ม.`:'กำลังหาตำแหน่ง…'):'ปิดอยู่ เพื่อนจะไม่เห็นตำแหน่งของคุณ';
- $('#shareRow').innerHTML=`<div><b>แชร์ตำแหน่งของ${MM[ME].th}</b><small${geoErr?' class="err-t"':''}>${esc(gmsg)}</small></div><button class="tgl" id="shareT" role="switch" aria-checked="${sharing}" aria-label="แชร์ตำแหน่งของฉัน"></button>`;
+  if(far.length){tone='warn';line1=far.map(x=>MM[x.l.member].th+' ห่าง '+fmtDist(x.d)).join(' · ')}
+  else{tone='good';line1=fresh.length===4?'อยู่ใกล้กันครบทั้ง 5 คน':`${fresh.length+1} คนอยู่ใกล้กัน (ภายใน 300 ม.)`}}
+ else line1=`แชร์ตำแหน่งอยู่ ${CS.locations.filter(l=>ageMs(l.at)<STALE).length} จาก 5 คน`;
+ const gmsg=geoErr==='denied'?'ไม่ได้รับสิทธิ์ตำแหน่ง เปิดในการตั้งค่าเครื่อง':geoErr==='nofix'?'ยังจับ GPS ไม่ได้':geoErr==='ไม่รองรับ'?'เครื่องนี้ไม่รองรับตำแหน่ง':sharing?(myPos?`${MM[ME].th}กำลังแชร์ · ±${Math.round(myPos.acc)} ม.`:'กำลังหาตำแหน่ง…'):`${MM[ME].th}ปิดแชร์อยู่`;
+ $('#crewTop').innerHTML=`<span class="dotc ${tone}"></span><div class="t"><b>${esc(line1)}</b><small${geoErr?' class="err-t"':''}>${esc(gmsg)}</small></div><button class="tgl" id="shareT" role="switch" aria-checked="${sharing}" aria-label="แชร์ตำแหน่งของฉัน"></button>`;
  $('#shareT').onclick=()=>sharing?stopShare():startShare();
  // members
  $('#mems').innerHTML=MEM.map(m=>{const l=CS.locations.find(x=>x.member===m.id),isMe=m.id===ME;
   const age=l?ageMs(l.at):null,on=l&&age<STALE;const dist=myPos&&l&&!isMe?distM(myPos,l):null;
   const status=isMe?(sharing?(myPos?'คุณ · กำลังแชร์':'คุณ · กำลังหาตำแหน่ง'):'คุณ · ไม่ได้แชร์'):l?`อัปเดต ${fmtAge(age)}`:'ยังไม่ได้แชร์ตำแหน่ง';
-  return `<button class="mem ${isMe?'me':''}" data-m="${m.id}" style="--c:${m.c}">${av(m.id,(isMe?sharing:on)?'':'off')}<span><b>${m.th}${isMe?' (คุณ)':''}</b><small>${status}</small></span><span class="d">${dist!=null?fmtDist(dist)+'<small>จากคุณ</small>':''}</span></button>`}).join('');
- $('#mems').querySelectorAll('.mem').forEach(b=>b.onclick=()=>{const id=b.dataset.m;const l=id===ME&&myPos?myPos:CS.locations.find(x=>x.member===id);
+  const sub=isMe?(sharing?'คุณ':'คุณ · ปิด'):dist!=null?fmtDist(dist):l?fmtAge(age).replace('ที่แล้ว',''):'ไม่แชร์';
+  return `<button class="mc ${isMe?'me':''}" data-m="${m.id}" style="--c:${m.c}" title="${esc(status)}">${av(m.id,'sm '+((isMe?sharing:on)?'':'off'))}<span><b>${m.th}</b><small>${esc(sub)}</small></span></button>`}).join('');
+ $('#mems').querySelectorAll('.mc').forEach(b=>b.onclick=()=>{const id=b.dataset.m;const l=id===ME&&myPos?myPos:CS.locations.find(x=>x.member===id);
   if(!l){toast(MM[id].th+' ยังไม่ได้แชร์ตำแหน่ง');return}if(!LMap)return;$('#crewMap').scrollIntoView({block:'center',behavior:reduce?'auto':'smooth'});LMap.setView([l.lat,l.lon],17);const mk=id===ME?LMe:LMk[id];mk&&mk.openPopup()});
  // tools
- $('#crewTools').innerHTML=`<button class="btn sec" id="invBtn">${ic('link')}ลิงก์ชวนเพื่อน</button><a class="btn sec" target="_blank" rel="noopener" href="https://line.me/R/share?text=${encodeURIComponent('เปิดลิงก์นี้เพื่อเข้าแอปทริปเฉิงตู–ฉงชิ่ง แล้วเลือกชื่อตัวเอง\n'+inviteLink())}">ส่งทาง LINE</a><button class="btn sec" id="meBtn">เปลี่ยนชื่อ (${MM[ME].th})</button>`;
+ $('#crewTools').innerHTML=`<button id="invBtn">คัดลอกลิงก์ชวน</button><a target="_blank" rel="noopener" href="https://line.me/R/share?text=${encodeURIComponent('เปิดลิงก์นี้เพื่อเข้าแอปทริปเฉิงตู–ฉงชิ่ง แล้วเลือกชื่อตัวเอง\n'+inviteLink())}">ส่งทาง LINE</a><button id="meBtn">เปลี่ยนชื่อ</button><span>ตำแหน่งอัปเดตเฉพาะตอนเปิดแอป</span>`;
  $('#invBtn').onclick=()=>copy(inviteLink());
  $('#meBtn').onclick=()=>{if(sharing)stopShare();ME=null;store.set('me',null);mapFitted=false;renderCrew();renderMoney()};
  updateMap();
@@ -1305,21 +1358,22 @@ function balances(list){const b=Object.fromEntries(MEM.map(m=>[m.id,{paid:0,shar
 function settle(b){const cr=[],db=[];Object.entries(b).forEach(([id,v])=>{const n=v.paid-v.share;if(n>0.005)cr.push([id,n]);else if(n<-0.005)db.push([id,-n])});cr.sort((a,c)=>c[1]-a[1]);db.sort((a,c)=>c[1]-a[1]);
  const out=[];let i=0,j=0;while(i<db.length&&j<cr.length){const x=Math.min(db[i][1],cr[j][1]);out.push({from:db[i][0],to:cr[j][0],amt:x});db[i][1]-=x;cr[j][1]-=x;if(db[i][1]<0.005)i++;if(cr[j][1]<0.005)j++}return out}
 function renderMoney(){const el=$('#moneyBody'),add=$('#addExp');if(!el)return;
- if(!CAN_SYNC||!SYNC||!ME){add.hidden=true;el.innerHTML=`<div class="card crew-card"><p>${!CAN_SYNC?'ใช้ได้ในแอปที่ติดตั้ง (rop-t.github.io/china-trip)':!SYNC?'เชื่อมต่อการซิงก์ในหัวข้อ "เพื่อนร่วมทริป" ก่อน แล้วทุกคนจะเห็นรายการเดียวกัน':'เลือกชื่อของคุณในหัวข้อ "เพื่อนร่วมทริป" ก่อน'}</p></div>`;return}
+ if(!CAN_SYNC||!SYNC||!ME){add.hidden=true;el.innerHTML=`<div class="card mtop"><p style="margin:0;font-size:13px;color:var(--muted)">${!CAN_SYNC?'ใช้ได้ในแอปที่ติดตั้ง (rop-t.github.io/china-trip)':!SYNC?'เชื่อมต่อการซิงก์ในหัวข้อ "เพื่อนร่วมทริป" ก่อน แล้วทุกคนจะเห็นรายการเดียวกัน':'เลือกชื่อของคุณในหัวข้อ "เพื่อนร่วมทริป" ก่อน'}</p></div>`;return}
  add.hidden=false;add.onclick=()=>openExpenseForm();
  const list=allExpenses(),b=balances(list),total=list.reduce((s,e)=>s+toCNY(e),0);
- if(!list.length){el.innerHTML=`<div class="card crew-card"><h3>ยังไม่มีรายการ</h3><p>กด "+ เพิ่ม" เมื่อมีคนจ่ายค่าอะไรแทนกลุ่ม เช่น ค่าอาหาร ค่า DiDi หรือค่าตั๋ว แล้วระบบจะสรุปว่าใครต้องโอนให้ใคร</p></div>`;return}
+ if(!list.length){el.innerHTML=`<div class="card mtop"><span style="font-size:13px;color:var(--muted)">ยังไม่มีรายการ กด "+ เพิ่ม" เมื่อมีคนจ่ายแทนกลุ่ม แล้วระบบจะสรุปว่าใครต้องโอนให้ใคร</span></div>`;return}
  const mx=Math.max(1,...MEM.map(m=>Math.abs(b[m.id].paid-b[m.id].share)));
  const bal=MEM.map(m=>{const n=b[m.id].paid-b[m.id].share,w=Math.abs(n)/mx*50;return `<div class="bal-r">${av(m.id,'sm')}<div class="bal-bar" title="จ่ายไป ${yen(b[m.id].paid)} · ส่วนของตัวเอง ${yen(b[m.id].share)}"><i style="${n>=0?`left:50%;width:${w}%;background:var(--bamboo)`:`right:50%;width:${w}%;background:var(--chili)`}"></i></div><div class="bal-v ${n>0.005?'pos':n<-0.005?'neg':''}">${n>0.005?'+':n<-0.005?'−':''}${yen(Math.abs(n)).slice(1)}<small>จ่าย ${yen(b[m.id].paid)}</small></div></div>`}).join('');
  const st=settle(b);
  const groups={};list.forEach(e=>{const d=cnDate(Date.parse(e.at));(groups[d]=groups[d]||[]).push(e)});
  const dayLbl=d=>{const k=DAYS.find(x=>x.date===d);return k?`Day ${k.n} · ${k.dow} ${+d.slice(8)} ต.ค.`:`${+d.slice(8)}/${+d.slice(5,7)}`};
- el.innerHTML=`<div class="card money-top"><span>ใช้ไปทั้งหมด ${list.length} รายการ</span><div class="big">${yen(total)}<small>${baht(total)}</small></div><span>เฉลี่ยคนละ ${yen(total/5)} · เรต 1 หยวน = ${rateTHB()} บาท</span></div>
- <div class="card bal"><div class="bal-cap"><span>ต้องจ่ายเพิ่ม</span><span>ได้เงินคืน</span></div>${bal}</div>
- <div><div class="sec-h" style="margin:8px 2px 8px"><div><h2 style="font-size:17px">ใครต้องโอนให้ใคร</h2><p>${st.length?`โอน ${st.length} ครั้งก็เคลียร์ครบ`:'ยอดเท่ากันหมดแล้ว ไม่ต้องโอน'}</p></div></div>
- <div class="settle">${st.map(x=>`<div class="st-row">${av(x.from,'sm')}${ic('right')}${av(x.to,'sm')}<div class="amt">${yen(x.amt)}<small>${MM[x.from].th} โอนให้ ${MM[x.to].th} · ${baht(x.amt)}</small></div></div>`).join('')}</div></div>
- <div><div class="sec-h" style="margin:8px 2px 0"><div><h2 style="font-size:17px">รายการทั้งหมด</h2></div></div><div class="exl">${Object.keys(groups).sort().reverse().map(d=>`<div class="exd">${dayLbl(d)}</div>`+groups[d].map(e=>{const c=CATS2[e.category]||CATS2.other,sp=e.split||[];
-   return `<div class="ex ${e.pending?'pend':''}" style="--c:var(${c[2]})"><span class="ci">${ic(c[1])}</span><span class="tx"><b>${esc(e.title)}${e.pending?'<i class="pend-t">รอซิงก์</i>':''}</b><small>${MM[e.payer]?MM[e.payer].th:e.payer}จ่าย · ${sp.length===5?'หารทุกคน':'หาร '+sp.map(x=>MM[x]?MM[x].th:x).join(', ')} · ${fmtLocal(Date.parse(e.at))}</small></span><span class="am">${e.currency==='THB'?'฿'+Number(e.amount).toLocaleString('th-TH'):yen(Number(e.amount))}<small>คนละ ${yen(toCNY(e)/Math.max(1,sp.length))}</small></span><button class="del" data-del="${e.id}" aria-label="ลบ ${esc(e.title)}">${ic('trash')}</button>${confirmDel===e.id?`<div class="ex-confirm">ลบรายการนี้สำหรับทุกคน?<button class="btn sec" data-no>ยกเลิก</button><button class="btn red" data-yes="${e.id}">ลบ</button></div>`:''}</div>`}).join('')).join('')}</div></div>`;
+ const mo=store.get('mOpen',{});
+ el.innerHTML=`<div class="card mtop"><div class="tot"><b>${yen(total)}</b><span>${baht(total)} · ${list.length} รายการ · คนละ ${yen(total/5)}</span></div>
+  ${st.length?st.map(x=>`<div class="st2">${av(x.from,'sm')}${ic('right')}${av(x.to,'sm')}<span class="nm">${MM[x.from].th} โอนให้ ${MM[x.to].th}</span><span class="amt">${yen(x.amt)}<small>${baht(x.amt)}</small></span></div>`).join(''):'<div class="st-none">ยอดเท่ากันหมดแล้ว ไม่ต้องโอน</div>'}</div>
+ <details class="card macc" data-k="bal" ${mo.bal?'open':''}><summary><span>ยอดของแต่ละคน <small>จ่ายไป / ต้องจ่ายเพิ่ม</small></span>${ic('down').replace('<svg','<svg class="chev"')}</summary><div class="mb"><div class="bal"><div class="bal-cap"><span>ต้องจ่ายเพิ่ม</span><span>ได้เงินคืน</span></div>${bal}</div></div></details>
+ <details class="card macc" data-k="list" ${mo.list||confirmDel?'open':''}><summary><span>รายการทั้งหมด <small>${list.length} รายการ</small></span>${ic('down').replace('<svg','<svg class="chev"')}</summary><div class="mb"><div class="exl">${Object.keys(groups).sort().reverse().map(d=>`<div class="exd">${dayLbl(d)}</div>`+groups[d].map(e=>{const c=CATS2[e.category]||CATS2.other,sp=e.split||[];
+   return `<div class="ex ${e.pending?'pend':''}" style="--c:var(${c[2]})"><span class="ci">${ic(c[1])}</span><span class="tx"><b>${esc(e.title)}${e.pending?'<i class="pend-t">รอซิงก์</i>':''}</b><small>${MM[e.payer]?MM[e.payer].th:e.payer}จ่าย · ${sp.length===5?'หารทุกคน':'หาร '+sp.map(x=>MM[x]?MM[x].th:x).join(', ')} · ${fmtLocal(Date.parse(e.at))}</small></span><span class="am">${e.currency==='THB'?'฿'+Number(e.amount).toLocaleString('th-TH'):yen(Number(e.amount))}<small>คนละ ${yen(toCNY(e)/Math.max(1,sp.length))}</small></span><button class="del" data-del="${e.id}" aria-label="ลบ ${esc(e.title)}">${ic('trash')}</button>${confirmDel===e.id?`<div class="ex-confirm">ลบรายการนี้สำหรับทุกคน?<button class="btn sec" data-no>ยกเลิก</button><button class="btn red" data-yes="${e.id}">ลบ</button></div>`:''}</div>`}).join('')).join('')}</div></div></details>`;
+ el.querySelectorAll('details.macc').forEach(d=>d.addEventListener('toggle',()=>{const o=store.get('mOpen',{});o[d.dataset.k]=d.open;store.set('mOpen',o)}));
  el.querySelectorAll('[data-del]').forEach(x=>x.onclick=()=>{confirmDel=x.dataset.del;renderMoney()});
  const no=el.querySelector('[data-no]');if(no)no.onclick=()=>{confirmDel=null;renderMoney()};
  const yes=el.querySelector('[data-yes]');if(yes)yes.onclick=()=>{const id=yes.dataset.yes;confirmDel=null;const i=OUT.findIndex(o=>o.fn==='trip_add_expense'&&o.args.p_id===id);
