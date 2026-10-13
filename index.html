@@ -1277,9 +1277,9 @@ function renderCrew(){const el=$('#crewBody');if(!el)return;renderSyncPill();
 }
 function setupHtml(){return `<div class="card crew-card"><h3>เชื่อมต่อการซิงก์ของกลุ่ม</h3>
  <p><b>ถ้ามีลิงก์ชวนจากเพื่อน</b> แตะลิงก์นั้นได้เลย แอปจะตั้งค่าให้เอง</p>
- <p><b>คนตั้งค่าครั้งแรก</b> ใส่ข้อมูลจาก Supabase ด้านล่าง แล้วส่งลิงก์ชวนให้เพื่อน</p>
- <div class="fld2"><label for="sbU">Project URL</label><input id="sbU" placeholder="https://xxxx.supabase.co" autocomplete="off" inputmode="url"></div>
- <div class="fld2"><label for="sbK">Publishable / anon key</label><input id="sbK" placeholder="sb_publishable_… หรือ eyJ…" autocomplete="off"></div>
+ <p><b>คนตั้งค่าครั้งแรก</b> ใส่ข้อมูลเซิร์ฟเวอร์ (Cloudflare Worker หรือ Supabase) ด้านล่าง แล้วส่งลิงก์ชวนให้เพื่อน</p>
+ <div class="fld2"><label for="sbU">Server URL</label><input id="sbU" placeholder="https://xxx.workers.dev หรือ https://xxx.supabase.co" autocomplete="off" inputmode="url"></div>
+ <div class="fld2"><label for="sbK">คีย์ (Cloudflare ใส่คำว่า cf ได้เลย · Supabase ใส่ publishable key)</label><input id="sbK" placeholder="cf" autocomplete="off"></div>
  <div class="fld2"><label for="sbG">รหัสทริป</label><input id="sbG" placeholder="cdcq-…" autocomplete="off" autocapitalize="off"></div>
  <div class="err-t" id="sbErr" hidden></div>
  <button class="btn pri" id="sbSave">เชื่อมต่อ</button></div>`}
@@ -1287,7 +1287,7 @@ function bindSetup(){$('#sbSave').onclick=async()=>{const u=$('#sbU').value.trim
  if(!/^https:\/\/.+/.test(u)||!k||!g){er.hidden=false;er.textContent='กรอกให้ครบทั้ง 3 ช่อง (URL ต้องขึ้นต้นด้วย https://)';return}
  const btn=$('#sbSave');btn.disabled=true;btn.textContent='กำลังทดสอบ…';const prev=SYNC;SYNC={u,k,g};
  try{await rpc('trip_state');store.set('sync',SYNC);syncState='idle';toast('เชื่อมต่อสำเร็จ');renderCrew();renderMoney();crewSync()}
- catch(e){SYNC=prev;btn.disabled=false;btn.textContent='เชื่อมต่อ';er.hidden=false;er.textContent=e.http?(/invalid trip code/.test(e.message)?'รหัสทริปไม่ตรงกับในฐานข้อมูล':e.http===404?'ไม่พบฟังก์ชัน ตรวจว่ารันสคริปต์ SQL แล้ว':(e.http===401||e.http===403)?'คีย์ไม่ถูกต้อง':'ผิดพลาด: '+e.message):'เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ ตรวจ URL และอินเทอร์เน็ต'}}}
+ catch(e){SYNC=prev;btn.disabled=false;btn.textContent='เชื่อมต่อ';er.hidden=false;er.textContent=e.http?(/invalid trip code/.test(e.message)?'รหัสทริปไม่ตรงกับในฐานข้อมูล':e.http===404?'ไม่พบ API ตรวจ URL และโค้ด Worker / สคริปต์ SQL':(e.http===401||e.http===403)?'คีย์ไม่ถูกต้อง':'ผิดพลาด: '+e.message):'เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ ตรวจ URL และอินเทอร์เน็ต'}}}
 
 /* money */
 const CATS2={food:['อาหาร','food','--chili'],move:['เดินทาง','car','--river'],ticket:['ตั๋ว/เข้าชม','ticket','--gold'],shop:['ช้อปปิ้ง','bag2','--plum2'],hotel:['ที่พัก','hotel','--bamboo'],other:['อื่นๆ','list','--muted']};
@@ -1342,7 +1342,7 @@ function openExpenseForm(){const f={cur:'CNY',cat:'food',payer:ME,split:new Set(
   F.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{f.payer=b.dataset.p;F.querySelectorAll('[data-p]').forEach(x=>x.setAttribute('aria-pressed',x===b))});
   F.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{const id=b.dataset.s;f.split.has(id)?f.split.delete(id):f.split.add(id);b.setAttribute('aria-pressed',f.split.has(id));per()});
   $('#exAll').onclick=()=>{MEM.forEach(m=>f.split.add(m.id));F.querySelectorAll('[data-s]').forEach(x=>x.setAttribute('aria-pressed','true'));per()};
-  per();setTimeout(()=>$('#exT').focus(),250);
+  per();setTimeout(()=>{const t=$('#exT');t&&t.focus()},250);
   F.onsubmit=ev=>{ev.preventDefault();const t=$('#exT').value.trim(),n=num(),er=$('#exErr');
    const msg=!t?'ใส่ชื่อรายการ':!(n>0)?'ใส่จำนวนเงินมากกว่า 0':n>1e7?'จำนวนเงินมากเกินไป':!f.split.size?'เลือกคนที่หารอย่างน้อย 1 คน':'';
    if(msg){er.hidden=false;er.textContent=msg;return}
