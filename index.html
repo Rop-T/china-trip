@@ -650,7 +650,7 @@ img{display:block}
     <div class="sec-h" style="margin-top:28px"><div><h2>ข้อมูลสำคัญ</h2></div></div>
     <div class="info" id="info"></div>
     <div class="sos" style="margin-top:10px"><div class="card"><b>110</b><span>ตำรวจ</span></div><div class="card"><b>120</b><span>รถพยาบาล</span></div><div class="card"><b>119</b><span>ดับเพลิง</span></div></div>
-    <p class="foot">ใช้งานได้แม้ไม่มีอินเทอร์เน็ต (ยกเว้นลิงก์แผนที่) · รูปสถานที่ตัดจากโปสเตอร์แผนเที่ยวต้นฉบับ · เวลาในตารางเป็นเวลาจีน (เร็วกว่าไทย 1 ชม.)</p>
+    <p class="foot">เวอร์ชัน 13/10 23:52 · ใช้งานได้แม้ไม่มีอินเทอร์เน็ต (ยกเว้นลิงก์แผนที่) · รูปสถานที่ตัดจากโปสเตอร์แผนเที่ยวต้นฉบับ · เวลาในตารางเป็นเวลาจีน (เร็วกว่าไทย 1 ชม.)</p>
     <button class="resetbtn" id="resetTicks">ล้างเครื่องหมาย "ไปแล้ว" ที่ติ๊กเอง</button>
   </section>
 </main>
@@ -1160,7 +1160,10 @@ $('#resetTicks').onclick=()=>{st.ticks={};store.set('ticks',{});renderAll();toas
  addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;show()});
  addEventListener('appinstalled',()=>{box.hidden=true});
  setTimeout(()=>{if(box.hidden)show()},1200);})();
-if('serviceWorker' in navigator&&location.protocol!=='file:'){navigator.serviceWorker.register('sw.js').then(r=>{
+if('serviceWorker' in navigator&&location.protocol!=='file:'){const hadCtl=!!navigator.serviceWorker.controller;let reloaded=false;
+ navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadCtl||reloaded)return;reloaded=true;if(!layer.innerHTML)location.reload();else toast('มีเวอร์ชันใหม่ ปิดแล้วเปิดแอปอีกครั้งเพื่ออัปเดต')});
+ navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{
+ r.update().catch(()=>{});document.addEventListener('visibilitychange',()=>{if(!document.hidden)r.update().catch(()=>{})});
  const done=()=>{if(!store.get('offlineReady',false)){store.set('offlineReady',true);toast('พร้อมใช้งานแบบออฟไลน์แล้ว')}};
  if(r.active)done();else navigator.serviceWorker.ready.then(done)}).catch(()=>{})}
 
