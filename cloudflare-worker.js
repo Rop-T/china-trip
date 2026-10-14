@@ -26,6 +26,8 @@ async function ensureSchema(db) {
       id TEXT PRIMARY KEY, title TEXT NOT NULL, amount REAL NOT NULL, currency TEXT NOT NULL,
       payer TEXT NOT NULL, split TEXT NOT NULL, category TEXT, spent_at TEXT NOT NULL,
       created_by TEXT, deleted INTEGER NOT NULL DEFAULT 0, created_at TEXT NOT NULL)`),
+    db.prepare(`CREATE TABLE IF NOT EXISTS plan (
+      id TEXT PRIMARY KEY, data TEXT NOT NULL, updated_at TEXT NOT NULL)`),
   ]);
   ready = true;
 }
@@ -51,9 +53,10 @@ export default {
 
     switch (m[1]) {
       case 'trip_state': {
-        const [locs, exps] = await db.batch([
+        const [locs, exps, plan] = await db.batch([
           db.prepare('SELECT member, lat, lon, acc, updated_at FROM locations'),
           db.prepare('SELECT * FROM expenses WHERE deleted = 0 ORDER BY spent_at DESC'),
+          db.prepare('SELECT id, data, updated_at FROM plan'),
         ]);
         return json({
           now,
@@ -62,6 +65,7 @@ export default {
             id: r.id, title: r.title, amount: r.amount, currency: r.currency, payer: r.payer,
             split: JSON.parse(r.split), category: r.category, at: r.spent_at, by: r.created_by,
           })),
+          plan: plan.results.map((r) => ({ id: r.id, data: JSON.parse(r.data), at: r.updated_at })),
         });
       }
       case 'trip_ping': {
@@ -96,6 +100,22 @@ export default {
       case 'trip_del_expense': {
         if (!isUuid(a.p_id)) return fail('invalid id');
         await db.prepare('UPDATE expenses SET deleted = 1 WHERE id = ?1').bind(a.p_id.toLowerCase()).run();
+        return done();
+      }
+      case 'trip_plan_put': {
+        if (typeof a.p_id !== 'string' || !/^[\w-]{1,80}$/.test(a.p_id)) return fail('invalid id');
+        const d = a.p_data;
+        if (!d || typeof d !== 'object' || Array.isArray(d) || !['add', 'edit'].includes(d.type)) return fail('invalid plan data');
+        const text = JSON.stringify(d);
+        if (text.length > 4000) return fail('plan data too large');
+        await db.prepare(`INSERT INTO plan (id, data, updated_at) VALUES (?1, ?2, ?3)
+          ON CONFLICT(id) DO UPDATE SET data = excluded.data, updated_at = excluded.updated_at`)
+          .bind(a.p_id, text, now).run();
+        return done();
+      }
+      case 'trip_plan_del': {
+        if (typeof a.p_id !== 'string' || !/^[\w-]{1,80}$/.test(a.p_id)) return fail('invalid id');
+        await db.prepare('DELETE FROM plan WHERE id = ?1').bind(a.p_id).run();
         return done();
       }
       default:

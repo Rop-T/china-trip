@@ -623,6 +623,20 @@ img{display:block}
 .macc .mb{padding:0 12px 12px}
 .macc .bal{padding:0;border:0;box-shadow:none}
 
+/* ---------- plan editing ---------- */
+.ev .tx .edt{display:inline-block;font-size:10.5px;font-weight:600;color:var(--river);background:var(--river-soft);border-radius:5px;padding:0 6px;margin-top:2px}
+.addplace{margin-top:12px;width:100%;display:flex;align-items:center;justify-content:center;gap:6px;padding:11px;border:1.5px dashed color-mix(in srgb,var(--cc) 55%,var(--line));border-radius:14px;background:transparent;color:var(--cc);font-weight:600;font-size:14px;cursor:pointer;font-family:var(--f-display)}
+.addplace svg{width:18px;height:18px}
+.addplace:hover{background:color-mix(in srgb,var(--cc) 8%,transparent)}
+.hidl{margin-top:8px;font-size:13px;color:var(--muted)}
+.hidl summary{cursor:pointer;padding:4px 2px}
+.hid-r{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 2px;border-top:1px dashed var(--line)}
+.hid-r span{text-decoration:line-through;min-width:0}
+.plan-acts{margin-top:2px}
+.btn.dang{color:var(--chili)}
+.tm-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.plan-warn{font-size:12px;color:var(--gold);background:var(--gold-soft);border-radius:10px;padding:8px 10px}
+
 .inst{margin-top:12px;padding:14px;display:grid;grid-template-columns:48px 1fr;gap:4px 12px;align-items:center;position:relative}
 .inst img{width:48px;height:48px;border-radius:12px;grid-row:span 2}
 .inst b{font-family:var(--f-display);font-size:15px}
@@ -700,7 +714,7 @@ img{display:block}
       <details><summary><span class="ai2" style="--c:var(--plum2)" data-ic="globe"></span><span class="st"><b>แอปที่ควรมี</b><small>Alipay · WeChat · DiDi · Amap · Trip.com</small></span><svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg></summary><div class="acc-b"><div class="apps" id="apps"></div></div></details>
       <details><summary><span class="ai2" style="--c:var(--chili)" data-ic="warn"></span><span class="st"><b>ข้อมูลสำคัญ & เบอร์ฉุกเฉิน</b><small>ตำรวจ 110 · รถพยาบาล 120 · ดับเพลิง 119</small></span><svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg></summary><div class="acc-b"><div class="info" id="info"></div><div class="sos" style="margin-top:8px"><div class="card"><b>110</b><span>ตำรวจ</span></div><div class="card"><b>120</b><span>รถพยาบาล</span></div><div class="card"><b>119</b><span>ดับเพลิง</span></div></div></div></details>
     </div>
-    <p class="foot">เวอร์ชัน 14/10 00:09 · ใช้งานได้แม้ไม่มีอินเทอร์เน็ต (ยกเว้นลิงก์แผนที่) · รูปสถานที่ตัดจากโปสเตอร์แผนเที่ยวต้นฉบับ · เวลาในตารางเป็นเวลาจีน (เร็วกว่าไทย 1 ชม.)</p>
+    <p class="foot">เวอร์ชัน 14/10 08:49 · ใช้งานได้แม้ไม่มีอินเทอร์เน็ต (ยกเว้นลิงก์แผนที่) · รูปสถานที่ตัดจากโปสเตอร์แผนเที่ยวต้นฉบับ · เวลาในตารางเป็นเวลาจีน (เร็วกว่าไทย 1 ชม.)</p>
     <button class="resetbtn" id="resetTicks">ล้างเครื่องหมาย "ไปแล้ว" ที่ติ๊กเอง</button>
   </section>
 </main>
@@ -744,6 +758,8 @@ const P={
  globe:'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z',
  people:'M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z',
  wallet:'M21 18v1c0 1.1-.9 2-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14c1.1 0 2 .9 2 2v1h-9a2 2 0 00-2 2v8a2 2 0 002 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z',
+ pin:'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z',
+ edit:'M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z',
  trash:'M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z',
  link:'M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z',
  warn:'M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z',
@@ -869,8 +885,9 @@ const FOOD=['taode','bayi','hym'],MOVEP=['tfu','bkk','cdeast','cqsta','wulong'];
 const catOf=e=>e.ill==='meal'||FOOD.includes(e.place)?'food':(e.ill==='car'||e.ill==='bag'||MOVEP.includes(e.place)||(e.place&&PL[e.place].hotel))?'move':'sight';
 DAYS.forEach(d=>{const [y,m,dd]=d.date.split('-').map(Number);d.ev.forEach((e,i)=>{const [h,mi]=e.t.split(':').map(Number);e.ts=Date.UTC(y,m-1,dd+(e.next?1:0),h-(e.tz||8),mi);e.day=d.n;e.i=i;e.key=d.n+'-'+i;
  const base=e.place?PL[e.place]:{};e.o=e.ill?Object.assign({},base,{img:null,ill:e.ill}):base;e.cat=catOf(e)})});
-const ALL=DAYS.flatMap(d=>d.ev),FIRST=ALL[0].ts,LAST=ALL[ALL.length-1].ts;
+let ALL=DAYS.flatMap(d=>d.ev);const FIRST=ALL[0].ts,LAST=ALL[ALL.length-1].ts;
 ALL.forEach((e,i)=>{e.end=ALL[i+1]?ALL[i+1].ts:e.ts+36e5});
+const BASE=DAYS.map(d=>d.ev.map(e=>Object.assign({},e)));
 
 /* ---------- state ---------- */
 const st={sim:null,ticks:store.get('ticks',{}),open:{},filter:'all',day:1,floatHidden:null};
@@ -954,7 +971,7 @@ function evRow(e,k,d){const s=statusOf(e);const zh=e.zh||e.o.zh;
   <button class="open" data-k="${e.key}" aria-label="ดูรายละเอียด ${esc(e.th)}"></button>
   <span class="t">${e.t}${e.note?`<small>${e.note}</small>`:s==='now'?'<small>ตอนนี้</small>':''}</span>
   <span class="th">${media(e.o)}</span>
-  <span class="tx"><b>${esc(e.th)}</b>${e.sub?`<span>${esc(e.sub)}</span>`:''}${zh?`<span class="zh">${zh}</span>`:''}</span>
+  <span class="tx"><b>${esc(e.th)}</b>${e.sub?`<span>${esc(e.sub)}</span>`:''}${zh?`<span class="zh">${zh}</span>`:''}${e.added?`<span class="edt">เพิ่มโดย${planWho(e.added)}</span>`:e.edited?`<span class="edt">แก้ไขโดย${planWho(e.edited)}</span>`:''}</span>
   <button class="ckb" data-k="${e.key}" aria-pressed="${s==='done'}" aria-label="${s==='done'?'ยกเลิกว่าไปแล้ว':'ทำเครื่องหมายว่าไปแล้ว'}: ${esc(e.th)}"><i>${ic('check')}</i></button></div>`}
 function renderPanel(dir){const d=DAYS[st.day-1];const el=$('#panel');el.style.setProperty('--cc',`var(${d.cc})`);
  const done=d.ev.filter(isDone),dn=done.length,all=d.ev.length,complete=dn===all;
@@ -975,6 +992,8 @@ function renderPanel(dir){const d=DAYS[st.day-1];const el=$('#panel');el.style.s
   <div class="filters" role="group" aria-label="กรองรายการ">${FILTERS.filter(([k])=>counts[k]).map(([k,l,i])=>`<button class="fc" data-f="${k}" aria-pressed="${st.filter===k}">${ic(i)}${l} <em>${counts[k]}</em></button>`).join('')}</div>
   ${dn?`<button class="donebar" id="doneBar" aria-expanded="${opened}"><span class="stack">${doneThumbs}</span><div><b>${opened?'ซ่อนที่ไปแล้ว':'ไปแล้ว '+dn+' รายการ'}</b><small>${opened?'แตะเพื่อพับเก็บอีกครั้ง':'พับเก็บไว้ แตะเพื่อดูย้อนหลัง'}</small></div>${ic('down')}</button>`:''}
   ${groups.length?groups.map(g=>`<div class="per"><div class="per-h">${ic(g.i)}${g.l}</div><div class="evs">${g.ev.map((e,k)=>evRow(e,k,d)).join('')}</div></div>`).join(''):`<div class="empty">ไม่มีรายการที่เหลือในหมวดนี้</div>`}`}
+  <button class="addplace" id="addPlace">${ic('pin')}เพิ่มสถานที่ใน Day ${d.n}</button>
+  ${(d.hidden||[]).length?`<details class="hidl"><summary>ยกเลิกแล้ว ${d.hidden.length} รายการ</summary>${d.hidden.map(h=>`<div class="hid-r"><span><b>${h.t}</b> ${esc(h.th)}</span><button class="mini" data-restore="${h.key}">กู้คืน</button></div>`).join('')}</details>`:''}
   ${d.hotel?`<div class="night-card"><span class="ic">${ic('night')}</span><div><b>คืนนี้พักที่ ${esc(HOTELS[d.hotel].n)}</b><span>${esc(HOTELS[d.hotel].a)} · ${esc(HOTELS[d.hotel].s)}</span></div></div>`:`<div class="night-card"><span class="ic">${ic('flight')}</span><div><b>คืนนี้บินกลับบ้าน</b><span>3U3937 · TFU 22:05 → BKK 00:10 (เวลาไทย, 20 ต.ค.)</span></div></div>`}
   <div class="tips"><b>เคล็ดลับ</b><ul>${d.tips.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div>
   <div class="daynav"><button id="pd" ${prev?'':'disabled'}>${ic('left')}<span><small>วันก่อน</small><b>${prev?'D'+prev.n+' '+esc(prev.title):''}</b></span></button><button id="nd" ${next?'':'disabled'}><span><small>วันถัดไป</small><b>${next?'D'+next.n+' '+esc(next.title):''}</b></span>${ic('right')}</button></div>
@@ -986,6 +1005,8 @@ function renderPanel(dir){const d=DAYS[st.day-1];const el=$('#panel');el.style.s
  el.querySelectorAll('.fc').forEach(b=>b.onclick=()=>{st.filter=b.dataset.f;renderPanel()});
  const db=$('#doneBar');if(db)db.onclick=()=>{st.open[d.n]=!opened;renderPanel()};
  const od=$('#openDone');if(od)od.onclick=()=>{st.open[d.n]=true;renderPanel()};
+ $('#addPlace').onclick=()=>openPlanForm({day:d.n});
+ el.querySelectorAll('[data-restore]').forEach(b=>b.onclick=()=>{const h=d.hidden.find(x=>x.key===b.dataset.restore);if(h)planPutBase(h,{hidden:false});toast('กู้คืนแล้ว')});
  $('#pd').onclick=()=>selectDay(d.n-1,true);$('#nd').onclick=()=>selectDay(d.n+1,true);
  if(dir&&!reduce)el.querySelectorAll('.evs').forEach(x=>x.classList.add('play'));
 }
@@ -1021,7 +1042,7 @@ function toast(t){document.querySelectorAll('.toast').forEach(x=>x.remove());con
 function copy(t){const ok=()=>toast('คัดลอกแล้ว');const fb=()=>{const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok()}catch(e){toast('กดค้างที่ตัวอักษรเพื่อคัดลอก')}ta.remove()};try{navigator.clipboard.writeText(t).then(ok,fb)}catch(e){fb()}}
 let lastFocus=null,wake=null;
 function close(){const cs=history.state||{};if(layer.innerHTML&&(cs.v==='sheet'||cs.v==='driver'||cs.v==='modal')){history.back();return}closeUI()}
-function closeUI(){layer.innerHTML='';try{wake&&wake.release()}catch(e){}wake=null;if(lastFocus&&lastFocus.focus&&document.contains(lastFocus))lastFocus.focus({preventScroll:true});renderFloat()}
+function closeUI(){layer.innerHTML='';if(typeof panelDirty!=='undefined'&&panelDirty){panelDirty=false;renderPanel()}try{wake&&wake.release()}catch(e){}wake=null;if(lastFocus&&lastFocus.focus&&document.contains(lastFocus))lastFocus.focus({preventScroll:true});renderFloat()}
 function openByKey(k){const e=ALL.find(x=>x.key===k);if(e){if(!layer.innerHTML)lastFocus=document.activeElement;sheet(e)}}
 function openPlace(p,dn){lastFocus=document.activeElement;sheet({th:PL[p].th,o:PL[p],place:p,day:dn,key:null})}
 function sheet(e,anim){const o=e.o||{};const zh=e.zh||o.zh;const en=o.en;const d=e.day?DAYS[e.day-1]:null;
@@ -1035,7 +1056,9 @@ function sheet(e,anim){const o=e.o||{};const zh=e.zh||o.zh;const en=o.en;const d
    <div class="acts">${e.key?`<button class="btn ${done?'sec':'grn'} wide" id="shDone">${ic(done?'left':'check')}${done?'ยกเลิก "ไปแล้ว"':'ไปแล้ว ติ๊กเลย'}</button>`:''}
    ${zh?`<button class="btn red wide" id="shDrv">${ic('talk')}ขยายชื่อจีนให้คนขับดู</button><button class="btn sec" id="shCp">${ic('copy')}คัดลอกชื่อจีน</button>`:''}
    ${en?`<a class="btn sec ${zh?'':'wide'}" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(en)}">${ic('map')}Google Maps</a>`:''}
-   ${zh?`<a class="btn sec wide" target="_blank" rel="noopener" href="https://uri.amap.com/search?keyword=${encodeURIComponent(zh)}">${ic('map')}เปิดใน Amap (แผนที่จีน)</a>`:''}</div></div>
+   ${zh?`<a class="btn sec wide" target="_blank" rel="noopener" href="https://uri.amap.com/search?keyword=${encodeURIComponent(zh)}">${ic('map')}เปิดใน Amap (แผนที่จีน)</a>`:''}</div>
+   ${e.key&&e.day?`<div class="acts plan-acts"><button class="btn sec" id="shEdit">${ic('edit')}แก้ไขแผน</button>${e.custom?`<button class="btn sec dang" id="shDel">${ic('trash')}ลบรายการนี้</button>`:`<button class="btn sec dang" id="shHide">${ic('trash')}ยกเลิกรายการนี้</button>`}</div>
+   <div class="ex-confirm" id="shConf" hidden>${e.custom?'ลบรายการนี้สำหรับทุกคน?':'ยกเลิกรายการนี้? กู้คืนได้ภายหลัง'}<button class="btn sec" id="shNo">ไม่</button><button class="btn red" id="shYes">${e.custom?'ลบ':'ยกเลิก'}</button></div>`:''}</div>
   ${list?`<div class="sh-nav"><button id="shP" ${pv?'':'disabled'}>${ic('left')}<span>${pv?pv.t+' '+esc(pv.th):''}</span></button><button id="shN" ${nx?'':'disabled'}><span>${nx?nx.t+' '+esc(nx.th):''}</span>${ic('right')}</button></div>`:''}</div>`;
  if(fresh&&!H.restoring)H.push({v:'sheet',k:e.key,p:e.place,day:e.day});
  if(fresh)layer.innerHTML=`<div class="scrim" id="scrim"><div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="${esc(e.th)}">${body}</div></div>`;
@@ -1044,6 +1067,10 @@ function sheet(e,anim){const o=e.o||{};const zh=e.zh||o.zh;const en=o.en;const d
  $('#scrim').onclick=x=>{if(x.target.id==='scrim')close()};$('#shx').onclick=close;if(fresh)$('#shx').focus({preventScroll:true});
  if(zh){$('#shDrv').onclick=()=>driver(zh,en,true);$('#shCp').onclick=()=>copy(zh)}
  const sd=$('#shDone');if(sd)sd.onclick=()=>{toggleDone(e.key,sd);setTimeout(()=>{if($('#sheet'))sheet(e)},reduce?0:540)};
+ const se=$('#shEdit');if(se)se.onclick=()=>openPlanForm({ev:e});
+ const sh=$('#shHide')||$('#shDel');if(sh)sh.onclick=()=>{$('#shConf').hidden=false};
+ const sn=$('#shNo');if(sn)sn.onclick=()=>{$('#shConf').hidden=true};
+ const sy=$('#shYes');if(sy)sy.onclick=()=>{if(e.custom)planDel(e.rid);else planPutBase(e,{hidden:true});close();toast(e.custom?'ลบแล้ว':'ยกเลิกรายการแล้ว')};
  if(list){const go=(t,a)=>{if(!t)return;H.rep({v:'sheet',k:t.key,p:t.place,day:t.day});sheet(t,a)};$('#shP').onclick=()=>go(pv,'sw-l');$('#shN').onclick=()=>go(nx,'sw-r');
   const s=$('#sheet');let x0=null,y0=0;s.ontouchstart=ev=>{x0=ev.touches[0].clientX;y0=ev.touches[0].clientY};s.ontouchend=ev=>{if(x0==null)return;const dx=ev.changedTouches[0].clientX-x0,dy=ev.changedTouches[0].clientY-y0;x0=null;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.6)go(dx<0?nx:pv,dx<0?'sw-r':'sw-l')}}}
 function driver(zh,sub,ask){H.push({v:'driver',back:(history.state||{}).v==='sheet'?history.state:null});layer.innerHTML=`<div class="driver" id="drv" role="dialog" aria-label="ข้อความภาษาจีน" tabindex="-1">${ask?'<div class="ask">请带我去这里</div>':''}<div class="dz">${zh}</div>${sub?`<div class="den">${esc(sub)}</div>`:''}<div class="close">แตะที่ใดก็ได้เพื่อปิด</div></div>`;
@@ -1231,7 +1258,7 @@ let SYNC=store.get('sync',null),ME=store.get('me',null);
 let CS=store.get('crewState',{locations:[],expenses:[],at:0,srv:0});
 let OUT=store.get('outbox',[]);
 let sharing=store.get('sharing',false),watchId=null,myPos=null,lastSent=null,geoErr='';
-let syncState=SYNC?'idle':'none',syncErr='',crewBusy=false,mapFitted=false,confirmDel=null;
+let syncState=SYNC?'idle':'none',syncErr='',crewBusy=false,mapFitted=false,confirmDel=null,planUnsupported=false;
 const av=(id,cls)=>{const m=MM[id];return m?`<span class="av ${cls||''}" style="--c:${m.c}">${m.th}</span>`:''};
 const b64e=o=>btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
 const b64d=t=>JSON.parse(decodeURIComponent(escape(atob(t.replace(/-/g,'+').replace(/_/g,'/')))));
@@ -1252,11 +1279,17 @@ const STALE=15*60000;
 const needSend=()=>myPos&&(!lastSent||Date.now()-lastSent.t>60000||distM(myPos,lastSent)>25);
 async function crewSync(){if(!SYNC||!CAN_SYNC||crewBusy)return;crewBusy=true;syncState='busy';renderSyncPill();let stage='';
  try{
-  while(OUT.length){stage='out';await rpc(OUT[0].fn,OUT[0].args);OUT.shift();store.set('outbox',OUT)}
+  stage='out';let i=0;const rest=[];
+  try{for(;i<OUT.length;i++){const op=OUT[i];try{await rpc(op.fn,op.args)}catch(e){
+    if(e.http===404&&/^trip_plan/.test(op.fn)){rest.push(op);planUnsupported=true;continue}
+    if(e.http===400&&!/invalid trip code/.test(e.message))continue;throw e}}}
+  finally{OUT=rest.concat(OUT.slice(i));store.set('outbox',OUT)}
   if(sharing&&ME&&needSend()){stage='ping';const p=myPos;await rpc('trip_ping',{p_member:ME,p_lat:p.lat,p_lon:p.lon,p_acc:Math.round(p.acc||0)});lastSent={lat:p.lat,lon:p.lon,t:Date.now()}}
-  stage='state';const s=await rpc('trip_state');CS={locations:s.locations||[],expenses:s.expenses||[],at:Date.now(),srv:Date.parse(s.now)||Date.now()};store.set('crewState',CS);syncState='ok';syncErr=''}
+  stage='state';const s=await rpc('trip_state');const prevPlan=JSON.stringify(CS.plan||[]);if(s.plan)planUnsupported=false;else planUnsupported=true;
+  CS={locations:s.locations||[],expenses:s.expenses||[],plan:s.plan||[],at:Date.now(),srv:Date.parse(s.now)||Date.now()};
+  if(JSON.stringify(CS.plan)!==prevPlan)planRefresh();store.set('crewState',CS);syncState='ok';syncErr=''}
  catch(e){if(e.http){syncState='err';syncErr=/invalid trip code/.test(e.message)?'รหัสทริปไม่ถูกต้อง':/Could not find|PGRST202|404/.test(e.message+e.http)?'ยังไม่ได้ติดตั้งฐานข้อมูล (สคริปต์ SQL)':(e.http===401||e.http===403)?'คีย์ไม่ถูกต้อง':'เซิร์ฟเวอร์ตอบกลับผิดพลาด';
-   if(stage==='out'&&e.http===400&&!/invalid trip code/.test(e.message)){OUT.shift();store.set('outbox',OUT)}}
+}
   else syncState='off'}
  crewBusy=false;renderCrew();renderMoney()}
 function startShare(){if(!ME)return;if(!('geolocation' in navigator)){geoErr='ไม่รองรับ';renderCrew();return}
@@ -1410,6 +1443,53 @@ function crewInit(){renderCrew();renderMoney();if(SYNC&&CAN_SYNC){if(sharing&&ME
  setInterval(()=>{if(SYNC&&ME)renderCrew()},60000);
  addEventListener('online',()=>crewSync());document.addEventListener('visibilitychange',()=>{if(!document.hidden)crewSync()})}
 
+/* ---------- plan editing: add places, change time/name, cancel (synced) ---------- */
+const PCAT={sight:['ที่เที่ยว','temple','old'],food:['ที่กิน','food','meal'],shop:['ช้อปปิ้ง','bag2','walk'],move:['เดินทาง','car','car'],other:['อื่นๆ','pin','park']};
+const planWho=id=>id&&MM[id]?' '+MM[id].th:'';
+function allPlan(){const m=new Map();(CS.plan||[]).forEach(r=>m.set(r.id,r.data));
+ OUT.forEach(o=>{if(o.fn==='trip_plan_put')m.set(o.args.p_id,o.args.p_data);else if(o.fn==='trip_plan_del')m.delete(o.args.p_id)});
+ return [...m].map(([id,data])=>({id,data}))}
+function applyPlan(){const ov={},adds=[];allPlan().forEach(r=>{const d=r.data;if(!d)return;if(d.type==='edit')ov[d.key]=Object.assign({},d,{rid:r.id});else if(d.type==='add')adds.push(Object.assign({},d,{rid:r.id}))});
+ DAYS.forEach((day,di)=>{const [y,m,dd]=day.date.split('-').map(Number);const evs=[];day.hidden=[];
+  const tsOf=(t,tz,next)=>{const [h,mi]=t.split(':').map(Number);return Date.UTC(y,m-1,dd+(next?1:0),h-(tz||8),mi)};
+  BASE[di].forEach(b=>{const e=Object.assign({},b),o=ov[b.key];
+   if(o){if(o.t&&/^\d{2}:\d{2}$/.test(o.t)){e.t=o.t;e.ts=tsOf(o.t,b.tz,b.next)}if(o.title)e.th=o.title;if(o.note!=null)e.sub=o.note;if(o.zh!=null&&o.zh!=='')e.zh=o.zh;e.edited=o.by||'x';e.rid=o.rid;if(o.hidden){day.hidden.push(e);return}}
+   evs.push(e)});
+  adds.filter(a=>a.day===day.n&&/^\d{2}:\d{2}$/.test(a.t||'')).forEach(a=>{const c=PCAT[a.cat]||PCAT.other;
+   evs.push({t:a.t,th:a.title,sub:a.note||'',zh:a.zh||'',custom:true,pcat:a.cat,cat:a.cat==='food'?'food':a.cat==='move'?'move':'sight',day:day.n,ts:tsOf(a.t),key:'c-'+a.rid,rid:a.rid,added:a.by||'x',place:null,
+    o:{ill:c[2],zh:a.zh||'',en:a.title+(a.zh?' '+a.zh:''),d:''}})});
+  evs.sort((a,b)=>a.ts-b.ts);evs.forEach((e,i)=>e.i=i);day.ev=evs});
+ ALL=DAYS.flatMap(d=>d.ev);ALL.forEach((e,i)=>{e.end=ALL[i+1]?ALL[i+1].ts:e.ts+36e5})}
+let panelDirty=false;
+function planRefresh(){applyPlan();if(!layer.innerHTML||!$('#sheet'))renderPanel();else panelDirty=true;renderNav();renderNow();renderFloat()}
+function planPush(op){OUT.push(op);store.set('outbox',OUT);planRefresh();if(SYNC&&CAN_SYNC)crewSync()}
+function planPutBase(e,patch){const id='base-'+e.key;const cur=(allPlan().find(r=>r.id===id)||{}).data||{};
+ planPush({fn:'trip_plan_put',args:{p_id:id,p_data:Object.assign({type:'edit',key:e.key},cur,patch,{by:ME||null,at:new Date().toISOString()})}})}
+function planDel(rid){planPush({fn:'trip_plan_del',args:{p_id:rid}})}
+function openPlanForm(o){const e=o.ev||null,isBase=e&&!e.custom,day=e?e.day:o.day;
+ const cur={t:e?e.t:'',title:e?e.th:'',zh:e?(e.zh||(e.o&&e.o.zh)||''):'',note:e?(e.sub||''):'',cat:e&&e.custom?e.pcat:'sight',day};
+ if(!cur.t){const n=new Date(Date.now()+8*36e5);cur.t=String(Math.min(23,n.getUTCHours()+1)).padStart(2,'0')+':00'}
+ const warn=!SYNC||!CAN_SYNC?'ยังไม่ได้เชื่อมต่อการซิงก์ การแก้ไขจะเห็นเฉพาะในเครื่องนี้':planUnsupported?'เซิร์ฟเวอร์ยังไม่รองรับการแก้แผน ต้องอัปเดตโค้ด Worker / SQL ก่อน เพื่อนจึงจะเห็น':'';
+ openModal(`<form class="form" id="plF" novalidate><h3>${e?'แก้ไขแผน':'เพิ่มสถานที่'}</h3>${warn?`<div class="plan-warn">${warn}</div>`:''}
+  <div class="tm-row"><div class="fld2"><label for="plD">วัน</label><select id="plD" ${isBase?'disabled':''}>${DAYS.map(d=>`<option value="${d.n}" ${d.n===day?'selected':''}>Day ${d.n} · ${d.dow} ${+d.date.slice(8)} ต.ค.</option>`).join('')}</select></div>
+  <div class="fld2"><label for="plT">เวลา (จีน)</label><input id="plT" type="time" value="${cur.t}" ${e&&e.tz?'disabled':''}></div></div>
+  <div class="fld2"><label for="plN">ชื่อสถานที่ / กิจกรรม</label><input id="plN" maxlength="80" value="${esc(cur.title)}" placeholder="เช่น ตรอกกว้างแคบ, ร้านหม้อไฟ Shu Daxia" autocomplete="off"></div>
+  <div class="fld2"><label for="plZ">ชื่อภาษาจีน (ไม่บังคับ ใช้ยื่นให้คนขับ)</label><input id="plZ" maxlength="40" value="${esc(cur.zh)}" placeholder="เช่น 宽窄巷子" autocomplete="off" ${isBase&&e.o&&e.o.zh?'disabled':''}></div>
+  ${isBase?'':`<div class="fld2"><label>หมวด</label><div class="cats">${Object.entries(PCAT).map(([k,c])=>`<button type="button" data-pc="${k}" aria-pressed="${k===cur.cat}">${ic(c[1])}${c[0]}</button>`).join('')}</div></div>`}
+  <div class="fld2"><label for="plO">โน้ต (ไม่บังคับ)</label><input id="plO" maxlength="120" value="${esc(cur.note)}" placeholder="เช่น นัดเจอหน้าประตูทางเข้า" autocomplete="off"></div>
+  <div class="err-t" id="plErr" hidden></div>
+  <button class="btn red" type="submit">${e?'บันทึกการแก้ไข':'เพิ่มในแผน'}</button>
+  ${isBase&&e.edited?`<button class="btn sec" type="button" id="plReset">กลับเป็นแผนเดิม</button>`:''}</form>`,()=>{
+  let cat=cur.cat;const F=$('#plF');
+  F.querySelectorAll('[data-pc]').forEach(b=>b.onclick=()=>{cat=b.dataset.pc;F.querySelectorAll('[data-pc]').forEach(x=>x.setAttribute('aria-pressed',x===b))});
+  const rs=$('#plReset');if(rs)rs.onclick=()=>{planDel('base-'+e.key);close();toast('กลับเป็นแผนเดิมแล้ว')};
+  setTimeout(()=>{const n=$('#plN');n&&!e&&n.focus()},250);
+  F.onsubmit=ev=>{ev.preventDefault();const t=$('#plT').value,title=$('#plN').value.trim(),zh=$('#plZ').value.trim(),note=$('#plO').value.trim(),dn=+$('#plD').value,er=$('#plErr');
+   const msg=!title?'ใส่ชื่อสถานที่':!/^\d{2}:\d{2}$/.test(t)?'ใส่เวลา':'';if(msg){er.hidden=false;er.textContent=msg;return}
+   if(isBase){const patch={title:title!==BASE[e.day-1].find(b=>b.key===e.key).th?title:'',note};if(!e.tz)patch.t=t;if(!(e.o&&e.o.zh))patch.zh=zh;planPutBase(e,patch)}
+   else{const id=e?e.rid:'c'+uuid();planPush({fn:'trip_plan_put',args:{p_id:id,p_data:{type:'add',day:dn,t,title,zh,note,cat,by:ME||null,at:new Date().toISOString()}}})}
+   close();toast(e?'บันทึกการแก้ไขแล้ว':'เพิ่มในแผนแล้ว');if(!e&&dn!==st.day)setTimeout(()=>selectDay(dn,true),300)}})}
+
 /* ---------- back button (Android & iPhone) ---------- */
 const H={restoring:false,lastRoot:0,
  push(sv){try{history.replaceState(Object.assign({},history.state,{y:scrollY}),'');history.pushState(sv,'')}catch(e){}},
@@ -1427,7 +1507,7 @@ addEventListener('popstate',ev=>{const s=ev.state||{v:'root'};
  if(s.day&&s.day!==st.day)selectDay(s.day,false,true);
  if(typeof s.y==='number')window.scrollTo({top:s.y,behavior:'auto'});
 });
-st.day=liveDay();renderAll();
+applyPlan();st.day=liveDay();renderAll();
 renderWx();loadWx();setInterval(()=>loadWx(),30*6e4);crewInit();
 addEventListener('online',()=>loadWx(true));document.addEventListener('visibilitychange',()=>{if(!document.hidden)loadWx()});
 try{history.replaceState({v:'root'},'');history.pushState({v:'home',day:st.day},'')}catch(e){}

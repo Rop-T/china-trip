@@ -33,10 +33,19 @@ create table if not exists trip_expenses (
   updated_at timestamptz not null default now()
 );
 
+create table if not exists trip_plan (
+  code text not null references trip_groups(code) on delete cascade,
+  id text not null,
+  data jsonb not null,
+  updated_at timestamptz not null default now(),
+  primary key (code, id)
+);
+
+alter table trip_plan enable row level security;
 alter table trip_groups enable row level security;
 alter table trip_locations enable row level security;
 alter table trip_expenses enable row level security;
-revoke all on trip_groups, trip_locations, trip_expenses from anon, authenticated;
+revoke all on trip_groups, trip_locations, trip_expenses, trip_plan from anon, authenticated;
 
 create or replace function trip_check(p_code text, p_member text default null)
 returns void language plpgsql security definer set search_path = public as $$
@@ -95,11 +104,33 @@ begin
                            from trip_locations where code = p_code), '[]'::json),
     'expenses', coalesce((select json_agg(json_build_object('id', id, 'title', title, 'amount', amount, 'currency', currency,
                            'payer', payer, 'split', split, 'category', category, 'at', spent_at, 'by', created_by) order by spent_at desc)
-                          from trip_expenses where code = p_code and not deleted), '[]'::json)
+                          from trip_expenses where code = p_code and not deleted), '[]'::json),
+    'plan', coalesce((select json_agg(json_build_object('id', id, 'data', data, 'at', updated_at)) from trip_plan where code = p_code), '[]'::json)
   );
 end $$;
 
+create or replace function trip_plan_put(p_code text, p_id text, p_data jsonb)
+returns void language plpgsql security definer set search_path = public as $$
+begin
+  perform trip_check(p_code);
+  if p_id !~ '^[A-Za-z0-9_-]{1,80}$' then raise exception 'invalid id'; end if;
+  if jsonb_typeof(p_data) <> 'object' or (p_data->>'type') not in ('add','edit') or length(p_data::text) > 4000 then
+    raise exception 'invalid plan data';
+  end if;
+  insert into trip_plan(code, id, data, updated_at) values (p_code, p_id, p_data, now())
+  on conflict (code, id) do update set data = excluded.data, updated_at = now();
+end $$;
+
+create or replace function trip_plan_del(p_code text, p_id text)
+returns void language plpgsql security definer set search_path = public as $$
+begin
+  perform trip_check(p_code);
+  delete from trip_plan where code = p_code and id = p_id;
+end $$;
+
 revoke execute on function trip_check(text, text) from public, anon, authenticated;
+grant execute on function trip_plan_put(text, text, jsonb) to anon, authenticated;
+grant execute on function trip_plan_del(text, text) to anon, authenticated;
 grant execute on function trip_ping(text, text, double precision, double precision, real) to anon, authenticated;
 grant execute on function trip_unping(text, text) to anon, authenticated;
 grant execute on function trip_add_expense(text, uuid, text, numeric, text, text, text[], text, timestamptz, text) to anon, authenticated;
