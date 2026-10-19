@@ -714,7 +714,8 @@ img{display:block}
       <details><summary><span class="ai2" style="--c:var(--plum2)" data-ic="globe"></span><span class="st"><b>แอปที่ควรมี</b><small>Alipay · WeChat · DiDi · Amap · Trip.com</small></span><svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg></summary><div class="acc-b"><div class="apps" id="apps"></div></div></details>
       <details><summary><span class="ai2" style="--c:var(--chili)" data-ic="warn"></span><span class="st"><b>ข้อมูลสำคัญ & เบอร์ฉุกเฉิน</b><small>ตำรวจ 110 · รถพยาบาล 120 · ดับเพลิง 119</small></span><svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg></summary><div class="acc-b"><div class="info" id="info"></div><div class="sos" style="margin-top:8px"><div class="card"><b>110</b><span>ตำรวจ</span></div><div class="card"><b>120</b><span>รถพยาบาล</span></div><div class="card"><b>119</b><span>ดับเพลิง</span></div></div></div></details>
     </div>
-    <p class="foot">เวอร์ชัน 14/10 08:49 · ใช้งานได้แม้ไม่มีอินเทอร์เน็ต (ยกเว้นลิงก์แผนที่) · รูปสถานที่ตัดจากโปสเตอร์แผนเที่ยวต้นฉบับ · เวลาในตารางเป็นเวลาจีน (เร็วกว่าไทย 1 ชม.)</p>
+    <p class="foot">เวอร์ชัน 19/10 11:49 · ใช้งานได้แม้ไม่มีอินเทอร์เน็ต (ยกเว้นลิงก์แผนที่) · รูปสถานที่ตัดจากโปสเตอร์แผนเที่ยวต้นฉบับ · เวลาในตารางเป็นเวลาจีน (เร็วกว่าไทย 1 ชม.)</p>
+    <button class="resetbtn" id="hardUpd">ตรวจหาอัปเดต (โหลดแอปใหม่ทั้งหมด)</button>
     <button class="resetbtn" id="resetTicks">ล้างเครื่องหมาย "ไปแล้ว" ที่ติ๊กเอง</button>
   </section>
 </main>
@@ -1241,6 +1242,7 @@ $('#resetTicks').onclick=()=>{st.ticks={};store.set('ticks',{});renderAll();toas
  addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;show()});
  addEventListener('appinstalled',()=>{box.hidden=true});
  setTimeout(()=>{if(box.hidden)show()},1200);})();
+$('#hardUpd').onclick=async()=>{toast('กำลังโหลดเวอร์ชันล่าสุด…');try{if('serviceWorker' in navigator){const rs=await navigator.serviceWorker.getRegistrations();await Promise.all(rs.map(r=>r.unregister()))}if(window.caches){const ks=await caches.keys();await Promise.all(ks.map(k=>caches.delete(k)))}}catch(e){}location.replace(location.pathname+'?v='+Date.now())};
 if('serviceWorker' in navigator&&location.protocol!=='file:'){const hadCtl=!!navigator.serviceWorker.controller;let reloaded=false;
  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadCtl||reloaded)return;reloaded=true;if(!layer.innerHTML)location.reload();else toast('มีเวอร์ชันใหม่ ปิดแล้วเปิดแอปอีกครั้งเพื่ออัปเดต')});
  navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{
