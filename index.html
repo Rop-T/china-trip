@@ -733,7 +733,7 @@ img{display:block}
       <details><summary><span class="ai2" style="--c:var(--plum2)" data-ic="globe"></span><span class="st"><b>แอปที่ควรมี</b><small>Grab · Google Maps · แปลภาษา · Klook</small></span><svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg></summary><div class="acc-b"><div class="apps" id="apps"></div></div></details>
       <details><summary><span class="ai2" style="--c:var(--chili)" data-ic="warn"></span><span class="st"><b>ข้อมูลสำคัญ & เบอร์ฉุกเฉิน</b><small>ตำรวจ 113 · รถพยาบาล 115 · ดับเพลิง 114</small></span><svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg></summary><div class="acc-b"><div class="info" id="info"></div><div class="sos" style="margin-top:8px"><div class="card"><b>113</b><span>ตำรวจ</span></div><div class="card"><b>115</b><span>รถพยาบาล</span></div><div class="card"><b>114</b><span>ดับเพลิง</span></div></div></div></details>
     </div>
-    <p class="foot">เวอร์ชัน 02/11 21:34 · ใช้งานได้แม้ไม่มีอินเทอร์เน็ต (ยกเว้นลิงก์แผนที่) · รูปจาก Wikimedia Commons (รูปที่มีป้าย "ภาพประกอบ" ไม่ใช่ร้านจริง) · เวลาในตารางเป็นเวลาเวียดนาม ซึ่งเท่ากับเวลาไทย</p>
+    <p class="foot">เวอร์ชัน 02/11 22:10 · ใช้งานได้แม้ไม่มีอินเทอร์เน็ต (ยกเว้นลิงก์แผนที่) · รูปจาก Wikimedia Commons (รูปที่มีป้าย "ภาพประกอบ" ไม่ใช่ร้านจริง) · เวลาในตารางเป็นเวลาเวียดนาม ซึ่งเท่ากับเวลาไทย</p>
     <button class="resetbtn" id="hardUpd">ตรวจหาอัปเดต (โหลดแอปใหม่ทั้งหมด)</button>
     <button class="resetbtn" id="resetTicks">ล้างเครื่องหมาย "ไปแล้ว" ที่ติ๊กเอง</button>
   </section>
@@ -800,32 +800,33 @@ const COM={vinw:'Vinpearl_Land_Nha_Trang_Ferris_wheel.jpg',church:'Nhà_thờ_N�
  pho:'Vietnamese_Pho_Beef_Noodles_2007.jpg',pho2:'Another_Pho_Bowl.jpg',banhcan:'Bánh_căn_(Vietnamese_mini_pancake)_clay_cooking_pots_2.jpg',coffee:'Ca_Phe_Sua_Da.jpg',
  nem:'Lễ_hội_ẩm_thực_Cửa_Việt_th4n2023_đặc_sản_nem_lụi_nướng_Nha_Trang_(1).jpg',oc:'Ốc_bươu_nướng_tiêu_Cần_Thơ.jpg',seafood:'Plateau_van_zeevruchten.jpg',beer:'Big_Timber_Brewing_flight_of_beer.jpg',
  pizza:'Pizza-napoletana.jpg',greek:'Gyros_pita.jpg',airport:'Cam_Ranh_International_Airport_Terminal_2.jpg'};
-const IMG=k=>'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(COM[k])+'?width=800';
+const LOC=new Set(['p_vinw','p_seafood','p_beach','p_market','p_church','p_pho','p_coffee','p_nem','p_airport','p_city','p_tower']); // photos cut from the trip itinerary poster
+const IMG=k=>LOC.has(k)?'ph/'+k+'.jpg':'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(COM[k])+'?width=800';
 const SRC=k=>'https://commons.wikimedia.org/wiki/File:'+encodeURIComponent(COM[k]);
 
 const PL={
  dmk:{th:'สนามบินดอนเมือง',en:'Don Mueang International Airport',ill:'plane'},
  bkk:{th:'สนามบินสุวรรณภูมิ',en:'Suvarnabhumi Airport',ill:'plane'},
- cxr:{th:'สนามบินคัมรานห์ (ญาจาง)',en:'Cam Ranh International Airport',zh:'Sân bay Quốc tế Cam Ranh',img:'airport',ill:'airport',d:'สนามบินของญาจาง อยู่ทางใต้ของตัวเมือง นั่งรถประมาณ 45 นาที'},
+ cxr:{th:'สนามบินคัมรานห์ (ญาจาง)',en:'Cam Ranh International Airport',zh:'Sân bay Quốc tế Cam Ranh',img:'p_airport',ill:'airport',d:'สนามบินของญาจาง อยู่ทางใต้ของตัวเมือง นั่งรถประมาณ 45 นาที'},
  annova:{th:'Annova Nha Trang Hotel',en:'Annova Nha Trang Hotel',zh:'Annova Nha Trang Hotel',ill:'hotel',hotel:1},
  airbnb:{th:'ที่พัก Airbnb',ill:'hotel',hotel:1,d:'ยังไม่ได้ใส่ชื่อและที่อยู่ กด "แก้ไขแผน" ที่รายการเช็กอินเพื่อเพิ่มได้'},
- mylee:{th:'Hải sản Mỹ Lệ',en:'Hải sản Mỹ Lệ Nha Trang',zh:'Hải sản Mỹ Lệ',img:'seafood',gen:1,ill:'meal',d:'ร้านอาหารทะเล เปิด 24 ชั่วโมง'},
- vinw:{th:'VinWonders Nha Trang',en:'VinWonders Nha Trang',zh:'VinWonders Nha Trang',img:'vinw',ill:'park',d:'สวนสนุก สวนน้ำ และอะควาเรียมบนเกาะฮนแจ (Hòn Tre) ฝั่งตรงข้ามตัวเมือง'},
- phosuluan:{th:'Phở Sư Luân',en:'Phở Sư Luân Nha Trang',zh:'Phở Sư Luân',img:'pho',gen:1,ill:'meal',d:'เฝอเนื้อ เฝอไก่ รีวิว 4.7★ · เปิด 06:00–22:00'},
+ mylee:{th:'Hải sản Mỹ Lệ',en:'Hải sản Mỹ Lệ Nha Trang',zh:'Hải sản Mỹ Lệ',img:'p_seafood',gen:1,ill:'meal',d:'ร้านอาหารทะเล เปิด 24 ชั่วโมง'},
+ vinw:{th:'VinWonders Nha Trang',en:'VinWonders Nha Trang',zh:'VinWonders Nha Trang',img:'p_vinw',ill:'park',d:'สวนสนุก สวนน้ำ และอะควาเรียมบนเกาะฮนแจ (Hòn Tre) ฝั่งตรงข้ามตัวเมือง'},
+ phosuluan:{th:'Phở Sư Luân',en:'Phở Sư Luân Nha Trang',zh:'Phở Sư Luân',img:'p_pho',gen:1,ill:'meal',d:'เฝอเนื้อ เฝอไก่ รีวิว 4.7★ · เปิด 06:00–22:00'},
  eibauer:{th:'Eibauer Brewpub',en:'Bia Đức Thầy Tu Eibauer Nha Trang Brewpub',zh:'Bia Đức Thầy Tu Eibauer',img:'beer',gen:1,ill:'beer',d:'เบียร์คราฟต์สไตล์เยอรมัน · เปิด 15:00–22:00'},
  lumiere:{th:'Lumiere Texas BBQ & Craft Beer',en:'Lumiere Texas BBQ & Craft Beer Nha Trang',zh:'Lumiere Texas BBQ & Craft Beer',img:'beer',gen:1,ill:'beer',d:'บาร์บีคิวสไตล์เท็กซัสและเบียร์คราฟต์ · เปิด 07:00–23:00'},
  hairspa:{th:'Hair spa',ill:'spa',d:'ยังไม่ได้ใส่ชื่อร้าน กด "แก้ไขแผน" เพื่อเพิ่มได้'},
  pizza4ps:{th:"Pizza 4P's",en:"Pizza 4P's Nha Trang",zh:"Pizza 4P's",img:'pizza',gen:1,ill:'meal',d:'พิซซ่าเตาฟืน คนเยอะ ควรจองโต๊ะล่วงหน้า'},
- beach:{th:'ชายหาดญาจาง',en:'Nha Trang Beach Tran Phu',zh:'Bãi biển Nha Trang',img:'beach',ill:'sea',d:'หาดยาวริมถนน Trần Phú กลางเมือง'},
- nightmkt:{th:'ไนท์มาร์เก็ตญาจาง',en:'Nha Trang Night Market',zh:'Chợ đêm Nha Trang',ill:'market',d:'ตลาดกลางคืนใกล้ชายหาด ของฝากและของกิน ต่อราคาได้'},
+ beach:{th:'ชายหาดญาจาง',en:'Nha Trang Beach Tran Phu',zh:'Bãi biển Nha Trang',img:'p_beach',ill:'sea',d:'หาดยาวริมถนน Trần Phú กลางเมือง'},
+ nightmkt:{img:'p_market',th:'ไนท์มาร์เก็ตญาจาง',en:'Nha Trang Night Market',zh:'Chợ đêm Nha Trang',ill:'market',d:'ตลาดกลางคืนใกล้ชายหาด ของฝากและของกิน ต่อราคาได้'},
  ocngon:{th:'Quán Ốc Ngon',en:'Quán Ốc Ngon Nha Trang',zh:'Quán Ốc Ngon',img:'oc',gen:1,ill:'meal',d:'ร้านหอยและอาหารทะเล · เปิด 10:00–23:00'},
  phokho:{th:'Phở Khô Hưng Huỳnh',en:'Phở Khô Hưng Huỳnh Nha Trang',zh:'Phở Khô Hưng Huỳnh',img:'pho2',gen:1,ill:'meal',d:'เฝอแห้ง รีวิว 4.8★ · เปิด 06:00–21:30'},
  banhcan51:{th:'Bánh Căn 51',en:'Bánh Căn 51 Tô Hiến Thành Nha Trang',zh:'Bánh Căn 51 (Tô Hiến Thành cũ)',img:'banhcan',gen:1,ill:'meal',d:'บั๋นกั๊น ขนมครกเวียดนามอบในถาดดินเผา (ร้านเดิมอยู่ถนน Tô Hiến Thành)'},
- jungle:{th:'Jungle Coffee Nha Trang',en:'Jungle Coffee Nha Trang',zh:'Jungle Coffee',img:'coffee',gen:1,ill:'coffee',d:'คาเฟ่ ลองกาแฟเวียดนามใส่นมข้น'},
- church:{th:'โบสถ์ภูเขา (Nhà thờ Núi)',en:'Nha Trang Cathedral',zh:'Nhà thờ Núi',img:'church',ill:'old',d:'อาสนวิหารคาทอลิกสไตล์โกธิกบนเนินเขากลางเมือง สร้างช่วงทศวรรษ 1930'},
+ jungle:{th:'Jungle Coffee Nha Trang',en:'Jungle Coffee Nha Trang',zh:'Jungle Coffee',img:'p_coffee',gen:1,ill:'coffee',d:'คาเฟ่ ลองกาแฟเวียดนามใส่นมข้น'},
+ church:{th:'โบสถ์ภูเขา (Nhà thờ Núi)',en:'Nha Trang Cathedral',zh:'Nhà thờ Núi',img:'p_church',ill:'old',d:'อาสนวิหารคาทอลิกสไตล์โกธิกบนเนินเขากลางเมือง สร้างช่วงทศวรรษ 1930'},
  anthoi:{th:'Ăn Thôi',en:'Ăn Thôi Nha Trang',zh:'Ăn Thôi',ill:'meal',d:'อาหารเวียดนาม รีวิว 4.8★ · เปิด 10:30–21:30'},
  mixgreek:{th:'MIX Greek Restaurant',en:'MIX Greek Restaurant Nha Trang',zh:'MIX Greek Restaurant',img:'greek',gen:1,ill:'meal',d:'อาหารกรีก · เปิด 11:00–21:30'},
- dvq:{th:'แหนมเนือง Đặng Văn Quyên',en:'Nem Nướng Đặng Văn Quyên Nha Trang',zh:'Nem nướng Đặng Văn Quyên',img:'nem',gen:1,ill:'meal',d:'แหนมเนือง (หมูย่างห่อแผ่นแป้งกับผักสด) · เปิด 07:00–21:00'}
+ dvq:{th:'แหนมเนือง Đặng Văn Quyên',en:'Nem Nướng Đặng Văn Quyên Nha Trang',zh:'Nem nướng Đặng Văn Quyên',img:'p_nem',gen:1,ill:'meal',d:'แหนมเนือง (หมูย่างห่อแผ่นแป้งกับผักสด) · เปิด 07:00–21:00'}
 };
 const media=o=>o&&o.img?`<img src="${IMG(o.img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML=window.__ill('${o.ill||'walk'}')">`:ill(o&&o.ill);
 
@@ -1056,7 +1057,7 @@ function sheet(e,anim){const o=e.o||{};const zh=e.zh||o.zh;const en=o.en;const d
    <div class="acts">${e.key?`<button class="btn ${done?'sec':'grn'} wide" id="shDone">${ic(done?'left':'check')}${done?'ยกเลิก "ไปแล้ว"':'ไปแล้ว ติ๊กเลย'}</button>`:''}
    ${zh?`<button class="btn red wide" id="shDrv">${ic('talk')}ขยายชื่อให้คนขับดู</button><button class="btn sec" id="shCp">${ic('copy')}คัดลอกชื่อ</button>`:''}
    ${en?`<a class="btn sec ${zh?'':'wide'}" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(en)}">${ic('map')}ดูรูปจริง (Maps)</a>`:''}</div>
-   ${o.img?`<p class="credit"><a href="${SRC(o.img)}" target="_blank" rel="noopener">รูป: Wikimedia Commons · ดูผู้ถ่ายและสัญญาอนุญาต</a></p>`:''}
+   ${o.img?(LOC.has(o.img)?'<p class="credit">รูปจากแผนเที่ยว (itinerary) ของทริปนี้</p>':`<p class="credit"><a href="${SRC(o.img)}" target="_blank" rel="noopener">รูป: Wikimedia Commons · ดูผู้ถ่ายและสัญญาอนุญาต</a></p>`):''}
    ${e.key&&e.day?`<div class="acts plan-acts"><button class="btn sec" id="shEdit">${ic('edit')}แก้ไขแผน</button>${e.custom?`<button class="btn sec dang" id="shDel">${ic('trash')}ลบรายการนี้</button>`:`<button class="btn sec dang" id="shHide">${ic('trash')}ยกเลิกรายการนี้</button>`}</div>
    <div class="ex-confirm" id="shConf" hidden>${e.custom?'ลบรายการนี้สำหรับทุกคน?':'ยกเลิกรายการนี้? กู้คืนได้ภายหลัง'}<button class="btn sec" id="shNo">ไม่</button><button class="btn red" id="shYes">${e.custom?'ลบ':'ยกเลิก'}</button></div>`:''}</div>
   ${list?`<div class="sh-nav"><button id="shP" ${pv?'':'disabled'}>${ic('left')}<span>${pv?pv.t+' '+esc(pv.th):''}</span></button><button id="shN" ${nx?'':'disabled'}><span>${nx?nx.t+' '+esc(nx.th):''}</span>${ic('right')}</button></div>`:''}</div>`;
@@ -1080,7 +1081,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&layer.innerHTML)clo
 
 /* ---------- route map ---------- */
 (function(){
- const N={city:{x:150,y:110,l:'ตัวเมืองญาจาง',s:'ที่พัก · D1–D4',img:'beach',c:'--bamboo',day:2},vin:{x:284,y:150,l:'VinWonders',s:'เกาะฮนแจ · D1',img:'vinw',c:'--chili',day:1},cxr:{x:128,y:262,l:'สนามบินคัมรานห์',s:'ไป D1 · กลับ D4',img:'airport',c:'--river',day:4}};
+ const N={city:{x:150,y:110,l:'ตัวเมืองญาจาง',s:'ที่พัก · D1–D4',img:'p_city',c:'--bamboo',day:2},vin:{x:284,y:150,l:'VinWonders',s:'เกาะฮนแจ · D1',img:'p_vinw',c:'--chili',day:1},cxr:{x:128,y:262,l:'สนามบินคัมรานห์',s:'ไป D1 · กลับ D4',img:'p_airport',c:'--river',day:4}};
  const paths={fl:'M10 330 C40 300 80 284 128 262',rd:'M128 262 C162 228 118 176 150 110',bt:'M150 110 C196 102 238 120 284 150'};
  $('#routeCard').innerHTML=`<svg viewBox="0 0 360 330" role="img" aria-label="แผนที่: บินถึงสนามบินคัมรานห์ นั่งรถเข้าตัวเมืองญาจางประมาณ 45 นาที และข้ามทะเลไป VinWonders บนเกาะฮนแจ">
  <defs>${Object.entries(N).map(([k,n])=>`<clipPath id="c-${k}"><circle cx="${n.x}" cy="${n.y}" r="27"/></clipPath>`).join('')}</defs>
