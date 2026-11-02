@@ -1,14 +1,14 @@
 {
- "name": "เฉิงตู–ฉงชิ่ง 2026",
- "short_name": "เฉิงตู–ฉงชิ่ง",
- "description": "แผนเที่ยวเฉิงตู–ฉงชิ่ง 14–19 ต.ค. 2026",
+ "name": "ญาจาง 2026",
+ "short_name": "ญาจาง",
+ "description": "แผนเที่ยวญาจาง เวียดนาม 13–16 พ.ย. 2026",
  "lang": "th",
  "start_url": "./",
  "scope": "./",
  "display": "standalone",
  "orientation": "portrait",
- "background_color": "#121834",
- "theme_color": "#121834",
+ "background_color": "#0B3550",
+ "theme_color": "#0B3550",
  "icons": [
   {
    "src": "icons/icon-192.png",

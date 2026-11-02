@@ -1,9 +1,9 @@
-// China trip sync API — Cloudflare Worker + D1
+// Nha Trang trip sync API — Cloudflare Worker + D1
 // Bind a D1 database to this Worker with the variable name: DB
 // The app calls POST /rest/v1/rpc/<function> (same as the Supabase version).
 
 const TRIP_CODE = 'CHANGE-ME';               // secret trip code — share only inside the group
-const MEMBERS = ['james', 'link', 'peach', 'new', 'june'];
+const MEMBERS = ['ya', 'ma', 'u', 'kao', 'june', 'new'];
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
@@ -20,13 +20,13 @@ let ready = false;
 async function ensureSchema(db) {
   if (ready) return;
   await db.batch([
-    db.prepare(`CREATE TABLE IF NOT EXISTS locations (
+    db.prepare(`CREATE TABLE IF NOT EXISTS nt_locations (
       member TEXT PRIMARY KEY, lat REAL NOT NULL, lon REAL NOT NULL, acc REAL, updated_at TEXT NOT NULL)`),
-    db.prepare(`CREATE TABLE IF NOT EXISTS expenses (
+    db.prepare(`CREATE TABLE IF NOT EXISTS nt_expenses (
       id TEXT PRIMARY KEY, title TEXT NOT NULL, amount REAL NOT NULL, currency TEXT NOT NULL,
       payer TEXT NOT NULL, split TEXT NOT NULL, category TEXT, spent_at TEXT NOT NULL,
       created_by TEXT, deleted INTEGER NOT NULL DEFAULT 0, created_at TEXT NOT NULL)`),
-    db.prepare(`CREATE TABLE IF NOT EXISTS plan (
+    db.prepare(`CREATE TABLE IF NOT EXISTS nt_plan (
       id TEXT PRIMARY KEY, data TEXT NOT NULL, updated_at TEXT NOT NULL)`),
   ]);
   ready = true;
@@ -54,9 +54,9 @@ export default {
     switch (m[1]) {
       case 'trip_state': {
         const [locs, exps, plan] = await db.batch([
-          db.prepare('SELECT member, lat, lon, acc, updated_at FROM locations'),
-          db.prepare('SELECT * FROM expenses WHERE deleted = 0 ORDER BY spent_at DESC'),
-          db.prepare('SELECT id, data, updated_at FROM plan'),
+          db.prepare('SELECT member, lat, lon, acc, updated_at FROM nt_locations'),
+          db.prepare('SELECT * FROM nt_expenses WHERE deleted = 0 ORDER BY spent_at DESC'),
+          db.prepare('SELECT id, data, updated_at FROM nt_plan'),
         ]);
         return json({
           now,
@@ -71,14 +71,14 @@ export default {
       case 'trip_ping': {
         if (!isMember(a.p_member)) return fail('invalid member');
         if (!isNum(a.p_lat) || !isNum(a.p_lon) || Math.abs(a.p_lat) > 90 || Math.abs(a.p_lon) > 180) return fail('invalid position');
-        await db.prepare(`INSERT INTO locations (member, lat, lon, acc, updated_at) VALUES (?1, ?2, ?3, ?4, ?5)
+        await db.prepare(`INSERT INTO nt_locations (member, lat, lon, acc, updated_at) VALUES (?1, ?2, ?3, ?4, ?5)
           ON CONFLICT(member) DO UPDATE SET lat = excluded.lat, lon = excluded.lon, acc = excluded.acc, updated_at = excluded.updated_at`)
           .bind(a.p_member, a.p_lat, a.p_lon, isNum(a.p_acc) ? a.p_acc : null, now).run();
         return done();
       }
       case 'trip_unping': {
         if (!isMember(a.p_member)) return fail('invalid member');
-        await db.prepare('DELETE FROM locations WHERE member = ?1').bind(a.p_member).run();
+        await db.prepare('DELETE FROM nt_locations WHERE member = ?1').bind(a.p_member).run();
         return done();
       }
       case 'trip_add_expense': {
@@ -86,11 +86,11 @@ export default {
         const split = Array.isArray(a.p_split) ? [...new Set(a.p_split)] : [];
         if (!isUuid(a.p_id)) return fail('invalid id');
         if (!title) return fail('missing title');
-        if (!isNum(a.p_amount) || a.p_amount <= 0 || a.p_amount > 1e7) return fail('invalid amount');
-        if (!['CNY', 'THB'].includes(a.p_currency)) return fail('invalid currency');
+        if (!isNum(a.p_amount) || a.p_amount <= 0 || a.p_amount > 1e10) return fail('invalid amount');
+        if (!['VND', 'THB'].includes(a.p_currency)) return fail('invalid currency');
         if (!isMember(a.p_payer) || !split.length || !split.every(isMember)) return fail('invalid member');
         const spent = typeof a.p_spent_at === 'string' && !isNaN(Date.parse(a.p_spent_at)) ? new Date(a.p_spent_at).toISOString() : now;
-        await db.prepare(`INSERT OR IGNORE INTO expenses (id, title, amount, currency, payer, split, category, spent_at, created_by, created_at)
+        await db.prepare(`INSERT OR IGNORE INTO nt_expenses (id, title, amount, currency, payer, split, category, spent_at, created_by, created_at)
           VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10)`)
           .bind(a.p_id.toLowerCase(), title, Math.round(a.p_amount * 100) / 100, a.p_currency, a.p_payer,
             JSON.stringify(split), a.p_category ? String(a.p_category).slice(0, 20) : null, spent,
@@ -99,7 +99,7 @@ export default {
       }
       case 'trip_del_expense': {
         if (!isUuid(a.p_id)) return fail('invalid id');
-        await db.prepare('UPDATE expenses SET deleted = 1 WHERE id = ?1').bind(a.p_id.toLowerCase()).run();
+        await db.prepare('UPDATE nt_expenses SET deleted = 1 WHERE id = ?1').bind(a.p_id.toLowerCase()).run();
         return done();
       }
       case 'trip_plan_put': {
@@ -108,14 +108,14 @@ export default {
         if (!d || typeof d !== 'object' || Array.isArray(d) || !['add', 'edit'].includes(d.type)) return fail('invalid plan data');
         const text = JSON.stringify(d);
         if (text.length > 4000) return fail('plan data too large');
-        await db.prepare(`INSERT INTO plan (id, data, updated_at) VALUES (?1, ?2, ?3)
+        await db.prepare(`INSERT INTO nt_plan (id, data, updated_at) VALUES (?1, ?2, ?3)
           ON CONFLICT(id) DO UPDATE SET data = excluded.data, updated_at = excluded.updated_at`)
           .bind(a.p_id, text, now).run();
         return done();
       }
       case 'trip_plan_del': {
         if (typeof a.p_id !== 'string' || !/^[\w-]{1,80}$/.test(a.p_id)) return fail('invalid id');
-        await db.prepare('DELETE FROM plan WHERE id = ?1').bind(a.p_id).run();
+        await db.prepare('DELETE FROM nt_plan WHERE id = ?1').bind(a.p_id).run();
         return done();
       }
       default:
